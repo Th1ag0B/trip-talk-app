@@ -1,27 +1,133 @@
-#container {
+.login-container {
+  --background: linear-gradient(to bottom, #003366, #0055cc);
+  color: #fff;
   text-align: center;
+  padding: 20px;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
+  .login-header {
+    margin-top: 30px;
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+    @font-face {
+      font-family: 'Righteous-Regular';
+      src: url(../../assets/font/Righteous-Regular.ttf) format('truetype');
+    }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+    @font-face {
+      font-family: 'WorkSans-Regular';
+      src: url(../../assets/font/WorkSans-Regular.ttf) format('truetype');
+    }
 
-  color: #8c8c8c;
+    h2 {
+      font-family: 'Righteous-Regular';
+      font-size: 26px
+    }
 
-  margin: 0;
-}
+    p {
+      font-family: 'WorkSans-Regular';
+      font-size: 13px;
+      color: #ffffff;
+    }
+  }
 
-#container a {
-  text-decoration: none;
+  .auth-toggle {
+    margin: 20px 0;
+
+    ion-segment-button {
+      font-family: 'Righteous-Regular';
+      color: #fff;
+      --background: transparent;
+      --indicator-color: #00ccff;
+    }
+  }
+
+  .auth-options {
+    .auth-button {
+      margin: 20px 0;
+      border-radius: 8px;
+
+      &.google {
+        --background: #ffffff;
+        --color: #000000;
+      }
+
+      &.apple {
+        --background: #ffffff;
+        --color: #000000;
+      }
+    }
+
+    .divider {
+      color: #cfcfcf;
+      margin: 15px 0;
+      font-size: 0.9rem;
+    }
+
+    .input-item {
+      --background: #fff;
+      --border-radius: 8px;
+      --padding-start: 10px;
+      --padding-end: 10px;
+      --inner-padding-end: 0;
+      margin-bottom: 15px;
+    
+      ion-icon {
+        color: #181717;
+        font-size: 20px;
+      }
+    
+      ion-input {
+        font-size: 16px;
+        color: #000;
+        padding: 10px 0;
+      }
+    
+      .toggle-password {
+        cursor: pointer;
+        color: #000000;
+        font-size: 20px;
+      }
+    }
+  
+
+    .forgot-password {
+      margin-top: 10px;
+      justify-content: flex-start;
+
+      a {
+        font-size: 14px;
+        color: #ffffff;
+        text-decoration: none;
+      }
+    }
+
+    .login-button {
+      font-family: 'Righteous-Regular';
+      margin-top: 20px;
+      box-shadow: #000;
+      --background: #0098ff;
+      --color: #fff;
+      border-radius: 8px;
+    }
+  }
+
+  .terms {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    color: #ffffff;
+
+    a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+  }
+
+  .signup-button {
+    font-family: 'Righteous-Regular';
+      margin-top: 20px;
+      box-shadow: #000;
+      --background: #0098ff;
+      --color: #fff;
+      border-radius: 8px;
+    }
+  
 }

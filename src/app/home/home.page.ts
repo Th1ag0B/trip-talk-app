@@ -6,7 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  authMode: 'login' | 'signup' = 'login';
 
   constructor() {}
+
+  toggleAuthMode(mode: 'login' | 'signup') {
+    this.authMode = mode;
+  }
 
 }
