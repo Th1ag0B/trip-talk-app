@@ -6,12 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  authMode: 'login' | 'signup' = 'login';
+  selectedButton: string = 'mostViews';
+  selectedTab: string = 'Home';
 
   constructor() {}
 
-  toggleAuthMode(mode: 'login' | 'signup') {
-    this.authMode = mode;
+  selectButton(button: string) {
+    this.selectedButton = button;
   }
 
+  selectTab(tab: string) {
+    this.selectedTab = tab;
+  }
 }

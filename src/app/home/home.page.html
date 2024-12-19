@@ -1,83 +1,138 @@
-<ion-content class="login-container">
-  <div class="login-header">
-    <h2>Welcome to TripTalk</h2>
-    <p>Login or Sign up to access your account</p>
-  </div>
+<ion-content class="initial-page">
+  <div class="welcome-header">
+    <h2>Hi, Tobi</h2>
+    <p>Explore the world</p>
 
-  <ion-segment [(ngModel)]="authMode" class="auth-toggle">
-    <ion-segment-button value="login">
-      Login
-    </ion-segment-button>
-    <ion-segment-button value="signup">
-      Sign Up
-    </ion-segment-button>
-  </ion-segment>
-
-
-  <div *ngIf="authMode === 'login'" class="auth-options">
-    <ion-button expand="block" class="auth-button google">
-      <ion-icon slot="start" name="logo-google"></ion-icon>
-      Login with Google
-    </ion-button>
-
-    <ion-button expand="block" class="auth-button apple">
-      <ion-icon slot="start" name="logo-apple"></ion-icon>
-      Login with Apple
-    </ion-button>
-
-    <div class="divider">or continue with email</div>
-
-    <ion-item lines="none" class="input-item">
-      <ion-icon slot="start" name="mail-outline" class="input-icon"></ion-icon>
-      <ion-input type="email" placeholder="Email Address"></ion-input>
-    </ion-item>
-
-    <ion-item lines="none" class="input-item">
-      <ion-icon slot="start" name="lock-closed-outline" class="input-icon"></ion-icon>
-      <ion-input type="password" placeholder="Password"></ion-input>
-      <ion-icon slot="end" name="eye-outline" class="toggle-password"></ion-icon>
-    </ion-item>
-
-    <div class="forgot-password">
-      <a href="#">Forgot password?</a>
+    <div class="user-profile">
+      <img src="../assets/imagem/Tobipfp.png" href="#" alt="Profile" />
     </div>
-
-    <ion-button expand="block" class="login-button">
-      Login
-    </ion-button>
   </div>
 
+  <ion-searchbar animated="true" placeholder="Search places"></ion-searchbar>
 
-  <div *ngIf="authMode === 'signup'" class="auth-options">
-    <ion-item lines="none" class="input-item">
-      <ion-icon slot="start" name="person-outline" class="input-icon"></ion-icon>
-      <ion-input type="text" placeholder="Full Name"></ion-input>
-    </ion-item>
-
-    <ion-item lines="none" class="input-item">
-      <ion-icon slot="start" name="mail-outline" class="input-icon"></ion-icon>
-      <ion-input type="email" placeholder="Email Address"></ion-input>
-    </ion-item>
-
-    <ion-item lines="none" class="input-item">
-      <ion-icon slot="start" name="lock-closed-outline" class="input-icon"></ion-icon>
-      <ion-input type="password" placeholder="Password"></ion-input>
-      <ion-icon slot="end" name="eye-outline" class="toggle-password"></ion-icon>
-    </ion-item>
-
-    <ion-item lines="none" class="input-item">
-      <ion-icon slot="start" name="lock-closed-outline" class="input-icon"></ion-icon>
-      <ion-input type="password" placeholder="Confirm Password"></ion-input>
-      <ion-icon slot="end" name="eye-outline" class="toggle-password"></ion-icon>
-    </ion-item>
-
-    <ion-button expand="block" class="signup-button">
-      Sign Up
-    </ion-button>
+  <div class="popular-header">
+    <h1>Popular</h1>
+    <button class="view-all" href="#">View All</button>
   </div>
 
-  <p class="terms">
-    By signing in with an account, you agree to TripTalk's
-    <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
-  </p>
+  <div class="button-group">
+    <button
+      (click)="selectButton('mostViews')"
+      [ngClass]="{'active': selectedButton === 'mostViews'}">
+      Most Views
+    </button>
+    <button
+      (click)="selectButton('nearby')"
+      [ngClass]="{'active': selectedButton === 'nearby'}">
+      Nearby
+    </button>
+    <button
+      (click)="selectButton('latest')"
+      [ngClass]="{'active': selectedButton === 'latest'}">
+      Latest
+    </button>
+  </div>
+
+  <div class="places-list">
+    <ion-card class="place-card">
+      <ion-img src="assets/images/mount-fuji.jpg"></ion-img>
+      <div class="place-info">
+        <h2>Mount Fuji, Tokyo</h2>
+        <div class="location">
+          <ion-icon name="location-outline"></ion-icon>
+          <p>Japan</p>
+        </div>
+        <div class="rating">
+          <ion-icon name="star-outline"></ion-icon>
+          <span>4.8</span>
+        </div>
+      </div>
+
+      <div class="favorite-btn">
+        <ion-icon name="heart-outline"></ion-icon>
+      </div>
+    </ion-card>
+
+    <ion-card class="place-card">
+      <ion-img src="assets/images/andes.jpg"></ion-img>
+      <div class="place-info">
+        <h2>Andes, South America</h2>
+        <div class="location">
+          <ion-icon name="location-outline"></ion-icon>
+          <p>America</p>
+        </div>
+        <div class="rating">
+          <ion-icon name="star-outline"></ion-icon>
+          <span>4.7</span>
+        </div>
+      </div>
+
+      <div class="favorite-btn">
+        <ion-icon name="heart-outline"></ion-icon>
+      </div>
+    </ion-card>
+
+    <ion-card class="place-card">
+      <ion-img src="assets/imagens/ptl.jpg"></ion-img>
+      <div class="place-info">
+        <h2>Ponte de Lima, Viana do Castelo</h2>
+        <div class="location">
+          <ion-icon name="location-outline"></ion-icon>
+          <p>Portugal</p>
+        </div>
+        <div class="rating">
+          <ion-icon name="star-outline"></ion-icon>
+          <span>4.7</span>
+        </div>
+      </div>
+
+      <div class="favorite-btn">
+        <ion-icon name="heart-outline"></ion-icon>
+      </div>
+    </ion-card>
+  </div>
+  
+<footer>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button
+        (click)="selectTab('Home')"
+        [ngClass]="{'tab-selected': selectedTab === 'Home'}">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-tab-button>
+
+      <ion-tab-button
+        (click)="selectTab('Recents')"
+        [ngClass]="{'tab-selected': selectedTab === 'Recents'}">
+        <ion-icon name="time-outline"></ion-icon>
+      </ion-tab-button>
+
+      <ion-tab-button
+        (click)="selectTab('Favorites')"
+        [ngClass]="{'tab-selected': selectedTab === 'Favorites'}">
+        <ion-icon name="heart-outline"></ion-icon>
+      </ion-tab-button>
+
+      <ion-tab-button
+        (click)="selectTab('Profile')"
+        [ngClass]="{'tab-selected': selectedTab === 'Profile'}">
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+
+  <div *ngIf="selectedTab === 'Home'">
+
+  </div>
+  <div *ngIf="selectedTab === 'Recents'">
+
+  </div>
+  <div *ngIf="selectedTab === 'Favorites'">
+
+  </div>
+  <div *ngIf="selectedTab === 'Profile'">
+
+  </div>
+</footer>
 </ion-content>
+
