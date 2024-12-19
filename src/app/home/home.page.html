@@ -4,7 +4,7 @@
     <p>Explore the world</p>
 
     <div class="user-profile">
-      <img src="../assets/icon/favicon.png" href="#" alt="Profile" />
+      <img src="../assets/imagem/Tobipfp.png" href="#" alt="Profile" />
     </div>
   </div>
 
@@ -47,6 +47,10 @@
           <span>4.8</span>
         </div>
       </div>
+
+      <div class="favorite-btn">
+        <ion-icon name="heart-outline"></ion-icon>
+      </div>
     </ion-card>
 
     <ion-card class="place-card">
@@ -62,10 +66,14 @@
           <span>4.7</span>
         </div>
       </div>
+
+      <div class="favorite-btn">
+        <ion-icon name="heart-outline"></ion-icon>
+      </div>
     </ion-card>
 
     <ion-card class="place-card">
-      <ion-img src="assets/images/ptl.jpg"></ion-img>
+      <ion-img src="assets/imagens/ptl.jpg"></ion-img>
       <div class="place-info">
         <h2>Ponte de Lima, Viana do Castelo</h2>
         <div class="location">
@@ -77,9 +85,14 @@
           <span>4.7</span>
         </div>
       </div>
+
+      <div class="favorite-btn">
+        <ion-icon name="heart-outline"></ion-icon>
+      </div>
     </ion-card>
   </div>
-
+  
+<footer>
   <ion-tabs>
     <ion-tab-bar slot="bottom">
       <ion-tab-button
@@ -109,15 +122,17 @@
   </ion-tabs>
 
   <div *ngIf="selectedTab === 'Home'">
-    <!-- Conteúdo da aba Home -->
+
   </div>
   <div *ngIf="selectedTab === 'Recents'">
-    <!-- Conteúdo da aba Recents -->
+
   </div>
   <div *ngIf="selectedTab === 'Favorites'">
-    <!-- Conteúdo da aba Favorites -->
+
   </div>
   <div *ngIf="selectedTab === 'Profile'">
-    <!-- Conteúdo da aba Profile -->
+
   </div>
+</footer>
 </ion-content>
+

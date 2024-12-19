@@ -91,7 +91,7 @@ ion-searchbar {
 }
 
 .initial-page .button-group button {
-  font-family: 'WorkSans-Regular';
+  font-family: 'Righteous-Regular';
   font-size: 16px;
   color: #000000;
   background-color: #ffffff;
@@ -120,7 +120,7 @@ ion-searchbar {
   padding: 10px 20px;
   scroll-behavior: smooth;
 }
-
+  
 .initial-page .places-list .place-card {
   position: relative;
   min-width: 200px;
@@ -216,4 +216,26 @@ ion-tab-button.tab-selected::after {
 
 ion-tab-button.tab-selected ion-icon {
   color: #ffffff;
+}
+.place-card {
+  position: relative;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #000000;
+  padding: 5px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.favorite-btn ion-icon {
+  font-size: 23px;
+  color: #ffffff
+}
+
+.favorite-btn:hover {
+  background: #ffffff;
 }
