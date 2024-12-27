@@ -1,0 +1,30 @@
+ion-tab-bar {
+    --background: transparent;
+    --border: none;
+  }
+  
+  ion-tab-button {
+    position: relative;
+  }
+  
+  ion-tab-button ion-icon {
+    color: #ffffff;
+    font-size: 24px;
+    transition: color 0.3s ease;
+  }
+  
+  ion-tab-button.tab-selected::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: #007bff;
+    border-radius: 50%;
+  }
+  
+  ion-tab-button.tab-selected ion-icon {
+    color: #ffffff;
+  }

@@ -1,22 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
 
+import { RecentsPageRoutingModule } from './recents-routing.module';
+
 import { FooterModule } from '../components/footer/footer.components.module';
-import { HomePageRoutingModule } from './home-routing.module';
-import { HomePage } from './home.page';
+import { RecentsPage } from './recents.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    IonicModule.forRoot(),
-    HomePageRoutingModule,
+    RecentsPageRoutingModule,
     FooterModule
   ],
-  declarations: [HomePage]
+  declarations: [RecentsPage]
 })
-export class HomeModule {}
-
+export class RecentsPageModule {}

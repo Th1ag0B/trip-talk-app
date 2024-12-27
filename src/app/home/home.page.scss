@@ -118,10 +118,25 @@ ion-searchbar {
   gap: 20px;
   overflow-x: auto;
   padding: 10px 20px;
-  scroll-behavior: smooth;
+  white-space: nowrap;
+  scrollbar-width: thin;
 }
+
+.initial-page .places-list::-webkit-scrollbar {
+  height: 8px;
+  color: transparent;
+}
+.initial-page .places-list::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 4px;
+}
+.initial-page .places-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
   
 .initial-page .places-list .place-card {
+  scroll-behavior: smooth;
   position: relative;
   min-width: 200px;
   height: 250px;
