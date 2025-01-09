@@ -14,11 +14,11 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
     this.tabs = [
       { id: 'Home', icon: 'home-outline', label: 'Home', route: '/home' },
-      { id: 'Recents', icon: 'time-outline', label: 'Recents', route: '/recents' },
+      { id: 'Recents', icon: 'add-circle-outline', label: 'Add', route: '/recents' },
       { id: 'Favorites', icon: 'heart-outline', label: 'Favorites', route: '/favorites' },
       { id: 'Profile', icon: 'person-outline', label: 'Profile', route: '/profile' },
     ];
-    this.selectedTab = this.tabs[0].id; // Selecionar a primeira aba por padrão
+    this.selectedTab = this.tabs[0].id;
   }
 
   selectTab(tabId: string) {

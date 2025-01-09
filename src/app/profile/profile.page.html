@@ -1,7 +1,13 @@
 <div class="profile-container">
   <div class="profile-header">
+    <ion-fab slot="fixed" vertical="top" horizontal="end">
+      <ion-fab-button (click)="presentLogoutModal()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
     <h2>Account</h2>
   </div>
+  
   <div class="initial-page">
     <div class="user-profile">
       <img src="../assets/imagem/Tobipfp.png" alt="Profile Picture" />

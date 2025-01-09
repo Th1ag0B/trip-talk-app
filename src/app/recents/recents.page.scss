@@ -1,242 +1,184 @@
 .initial-page {
-    --background: linear-gradient(to top, #003366, #0055cc);
+  --background: linear-gradient(to top, #003366, #0055cc);
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+}
+
+.initial-page .welcome-header {
+  margin-top: 30px;
+}
+
+@font-face {
+  font-family: 'Righteous-Regular';
+  src: url(../../assets/font/Righteous-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'WorkSans-Regular';
+  src: url(../../assets/font/WorkSans-Regular.ttf) format('truetype');
+}
+
+.initial-page .welcome-header h2 {
+  font-family: 'Righteous-Regular';
+  text-align: left;
+  margin-left: 30px;
+  font-size: 30px;
+}
+
+.initial-page .welcome-header p {
+  font-family: 'WorkSans-Regular';
+  font-size: 20px;
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 30px;
+  color: #cfcfcf;
+}
+
+.initial-page .user-profile {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #ffffff;
+}
+
+.initial-page .user-profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+form {
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 15px;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: #ffffff;
+}
+
+ion-item ion-input {
+  color: #ffffff;
+}
+
+ion-button {
+  background-color: #0055cc;
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+ion-button[disabled] {
+  background-color: #cccccc;
+}
+
+.initial-page .places-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px 20px;
+}
+
+.initial-page .places-list .place-card {
+  scroll-behavior: smooth;
+  position: relative;
+  min-width: 200px;
+  height: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.initial-page .places-list .place-card ion-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.initial-page .places-list .place-card .place-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+}
+
+.initial-page .places-list .place-card .place-info h2 {
+  font-family: 'Righteous-Regular';
+  font-size: 16px;
+  margin: 0 0 5px 0;
+}
+
+.initial-page .places-list .place-card .place-info .location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.initial-page .places-list .place-card .place-info .location ion-icon {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.initial-page .places-list .place-card .place-info .location p {
+  font-family: 'WorkSans-Regular';
+  margin: 0;
+}
+
+.initial-page .places-list .place-card .place-info .rating {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.initial-page .places-list .place-card .place-info .rating ion-icon {
+  color: #ffffff;
+  background-color: transparent;
+  font-size: 14px;
+}
+
+.initial-page .places-list .place-card .place-info .rating span {
+  font-family: 'WorkSans-Regular';
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #000000;
+  padding: 5px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.favorite-btn ion-icon {
+  font-size: 23px;
+  color: #ffffff;
+}
+
+.favorite-btn:hover {
+  background: #ffffff;
+}
+
+ion-fab {
+  margin-bottom: 50px;
+
+  ion-icon{ 
     color: #ffffff;
-    text-align: center;
-    padding: 20px;
+    stroke-width: 3px;
   }
-  
-  .initial-page .welcome-header {
-    margin-top: 30px;
-  }
-  
-  @font-face {
-    font-family: 'Righteous-Regular';
-    src: url(../../assets/font/Righteous-Regular.ttf) format('truetype');
-  }
-  
-  @font-face {
-    font-family: 'WorkSans-Regular';
-    src: url(../../assets/font/WorkSans-Regular.ttf) format('truetype');
-  }
-  
-  .initial-page .welcome-header h2 {
-    font-family: 'Righteous-Regular';
-    text-align: left;
-    margin-left: 30px;
-    font-size: 30px;
-  }
-  
-  .initial-page .welcome-header p {
-    font-family: 'WorkSans-Regular';
-    font-size: 20px;
-    text-align: left;
-    margin-top: 10px;
-    margin-left: 30px;
-    color: #cfcfcf;
-  }
-  
-  .initial-page .user-profile {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid #ffffff;
-  }
-  
-  .initial-page .user-profile img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  ion-searchbar {
-    position: relative;
-    z-index: 10;
-    --border-radius: 20px;
-    --color: #504f4f;
-    --background: #ffffff;
-  }
-  
-  .initial-page .popular-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 30px;
-    margin-top: 20px;
-  }
-  
-  .initial-page .popular-header h1 {
-    font-family: 'Righteous-Regular';
-    font-size: 20px;
-    margin: 0;
-    text-align: left;
-  }
-  
-  .initial-page .popular-header .view-all {
-    background-color: transparent;
-    padding: 5px 15px;
-    color: #ffffff;
-    font-family: 'Righteous-Regular';
-    font-size: 14px;
-  }
-  
-  .initial-page .button-group {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-    padding: 0 30px;
-  }
-  
-  .initial-page .button-group button {
-    font-family: 'Righteous-Regular';
-    font-size: 16px;
-    color: #000000;
-    background-color: #ffffff;
-    border-radius: 20px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    position: relative;
-    z-index: 5;
-  }
-  
-  .initial-page .button-group button.active {
-    background-color: #000000;
-    color: #ffffff;
-  }
-  
-  .initial-page .button-group button:hover {
-    background-color: #f0f0f0;
-    color: #000000;
-  }
-  
-  .initial-page .places-list {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding: 10px 20px;
-  }
-    
-  .initial-page .places-list .place-card {
-    scroll-behavior: smooth;
-    position: relative;
-    min-width: 200px;
-    height: 250px;
-    border-radius: 15px;
-    overflow: hidden;
-  }
-  
-  .initial-page .places-list .place-card ion-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .initial-page .places-list .place-card .place-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.6);
-    color: #ffffff;
-  }
-  
-  .initial-page .places-list .place-card .place-info h2 {
-    font-family: 'Righteous-Regular';
-    font-size: 16px;
-    margin: 0 0 5px 0;
-  }
-  
-  .initial-page .places-list .place-card .place-info .location {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 14px;
-    color: #ccc;
-  }
-  
-  .initial-page .places-list .place-card .place-info .location ion-icon {
-    font-size: 16px;
-    color: #ffffff;
-  }
-  
-  .initial-page .places-list .place-card .place-info .location p {
-    font-family: 'WorkSans-Regular';
-    margin: 0;
-  }
-  
-  .initial-page .places-list .place-card .place-info .rating {
-    display: flex;
-    align-items: center;
-    margin-top: 5px;
-  }
-  
-  .initial-page .places-list .place-card .place-info .rating ion-icon {
-    color: #ffffff;
-    background-color: transparent;
-    font-size: 14px;
-  }
-  
-  .initial-page .places-list .place-card .place-info .rating span {
-    font-family: 'WorkSans-Regular';
-    margin-left: 5px;
-    font-size: 14px;
-  }
-  
-  ion-tab-bar {
-    --background: transparent;
-    --border: none;
-  }
-  
-  ion-tab-button {
-    position: relative;
-  }
-  
-  ion-tab-button ion-icon {
-    color: #ffffff;
-    font-size: 24px;
-    transition: color 0.3s ease;
-  }
-  
-  ion-tab-button.tab-selected::after {
-    content: '';
-    position: absolute;
-    bottom: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 8px;
-    height: 8px;
-    background-color: #007bff;
-    border-radius: 50%;
-  }
-  
-  ion-tab-button.tab-selected ion-icon {
-    color: #ffffff;
-  }
-  .place-card {
-    position: relative;
-  }
-  
-  .favorite-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #000000;
-    padding: 5px;
-    border-radius: 100%;
-    cursor: pointer;
-  }
-  
-  .favorite-btn ion-icon {
-    font-size: 23px;
-    color: #ffffff
-  }
-  
-  .favorite-btn:hover {
-    background: #ffffff;
-  }
-  
+}

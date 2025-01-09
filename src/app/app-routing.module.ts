@@ -6,8 +6,8 @@ const routes: Routes = [
   { path: 'recents', loadChildren: () => import('./recents/recents.module').then(m => m.RecentsPageModule) },
   { path: 'favorites', loadChildren: () => import('./favorites/favorites.module').then(m => m.FavoritesPageModule) },
   { path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule) },
-  { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule) }, // Adiciona a página de login
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirecionar para login por padrão
+  { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule) },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
