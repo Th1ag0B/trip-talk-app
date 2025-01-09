@@ -1,37 +1,12 @@
 <ion-content class="initial-page">
   <div class="welcome-header">
-    <h2>Hi, Tobi</h2>
-    <p>Explore the world</p>
+    <h2>Favorites</h2>
 
     <div class="user-profile">
       <img src="../assets/imagem/Tobipfp.png" href="#" alt="Profile" />
     </div>
-  </div>
-
+  
   <ion-searchbar animated="true" placeholder="Search places"></ion-searchbar>
-
-  <div class="popular-header">
-    <h1>Popular</h1>
-    <button class="view-all" href="#">View All</button>
-  </div>
-
-  <div class="button-group">
-    <button
-      (click)="selectButton('mostViews')"
-      [ngClass]="{'active': selectedButton === 'mostViews'}">
-      Most Views
-    </button>
-    <button
-      (click)="selectButton('nearby')"
-      [ngClass]="{'active': selectedButton === 'nearby'}">
-      Nearby
-    </button>
-    <button
-      (click)="selectButton('latest')"
-      [ngClass]="{'active': selectedButton === 'latest'}">
-      Latest
-    </button>
-  </div>
 
   <div class="places-list">
     <ion-card class="place-card">
@@ -111,9 +86,9 @@
     </ion-card>
 
     <ion-card class="place-card">
-      <ion-img src="assets/imagem/big-ben.jpg"></ion-img>
+      <ion-img src="assets\imagem\big-ben.jpg"></ion-img>
       <div class="place-info">
-        <h2>Big Ben, London</h2>
+        <h2>Big Ben, Londron</h2>
         <div class="location">
           <ion-icon name="location-outline"></ion-icon>
           <p>England</p>
@@ -129,25 +104,20 @@
       </div>
     </ion-card>
 
-    <ion-card class="place-card">
-      <ion-img src="assets/imagem/coliseu-roma.jpg"></ion-img>
-      <div class="place-info">
-        <h2>The Coliseum, Roma</h2>
-        <div class="location">
-          <ion-icon name="location-outline"></ion-icon>
-          <p>Italy</p>
+      <ion-card class="place-card">
+        <ion-img src="assets/imagem/coliseu-roma.jpg"></ion-img>
+        <div class="place-info">
+          <h2>The Coliseum, Roma</h2>
+          <div class="location">
+            <ion-icon name="location-outline"></ion-icon>
+            <p>Italy</p>
+          </div>
+          <div class="rating">
+            <ion-icon name="star-outline"></ion-icon>
+            <span>4.7</span>
+          </div>
         </div>
-        <div class="rating">
-          <ion-icon name="star-outline"></ion-icon>
-          <span>4.7</span>
-        </div>
-      </div>
-
-      <div class="favorite-btn">
-        <ion-icon name="heart-outline"></ion-icon>
-      </div>
     </ion-card>
-  </div>
 
-  <app-footer></app-footer>
-</ion-content>
+<app-footer></app-footer>
+

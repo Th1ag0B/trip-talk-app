@@ -1,0 +1,53 @@
+<ion-content class="initial-page">
+  <div class="welcome-header">
+    <h2>Add New Places!</h2>
+
+    <div class="user-profile">
+      <img src="../assets/imagem/Tobipfp.png" href="#" alt="Profile" />
+    </div>
+
+  </div>
+
+  <!-- Mostrar o formulário apenas quando showForm for true -->
+  <div *ngIf="showForm">
+    <form [formGroup]="travelForm" (ngSubmit)="addEvent()">
+      <ion-item>
+        <ion-label position="floating">Place</ion-label>
+        <ion-input formControlName="title"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">City</ion-label>
+        <ion-input formControlName="city"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Country</ion-label>
+        <ion-input formControlName="country"></ion-input>
+      </ion-item>
+
+      <ion-button type="submit" expand="full" [disabled]="!travelForm.valid">Add Place</ion-button>
+    </form>
+  </div>
+
+  <div *ngIf="travelEvents.length > 0">
+    <ion-card *ngFor="let event of travelEvents">
+      <ion-img [src]="event.image"></ion-img>
+      <ion-card-header>
+        <ion-card-title>{{ event.title }}</ion-card-title>
+        <ion-card-subtitle>{{ event.city }}, {{ event.country }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Rating: {{ event.rating }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="toggleForm()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <app-footer></app-footer>
+</ion-content>

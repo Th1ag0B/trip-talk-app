@@ -52,65 +52,33 @@
   object-fit: cover;
 }
 
-ion-searchbar {
-  position: relative;
-  z-index: 10;
-  --border-radius: 20px;
-  --color: #504f4f;
-  --background: #ffffff;
-}
-
-.initial-page .popular-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 30px;
-  margin-top: 20px;
-}
-
-.initial-page .popular-header h1 {
-  font-family: 'Righteous-Regular';
-  font-size: 20px;
-  margin: 0;
-  text-align: left;
-}
-
-.initial-page .popular-header .view-all {
-  background-color: transparent;
-  padding: 5px 15px;
+form {
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 15px;
+  margin-bottom: 20px;
   color: #ffffff;
-  font-family: 'Righteous-Regular';
-  font-size: 14px;
 }
 
-.initial-page .button-group {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-  padding: 0 30px;
+ion-item {
+  --background: transparent;
+  --border-color: #ffffff;
 }
 
-.initial-page .button-group button {
-  font-family: 'Righteous-Regular';
-  font-size: 16px;
-  color: #000000;
-  background-color: #ffffff;
+ion-item ion-input {
+  color: #ffffff;
+}
+
+ion-button {
+  background-color: #0055cc;
+  color: white;
   border-radius: 20px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  position: relative;
-  z-index: 5;
+  padding: 10px;
+  margin-top: 10px;
 }
 
-.initial-page .button-group button.active {
-  background-color: #000000;
-  color: #ffffff;
-}
-
-.initial-page .button-group button:hover {
-  background-color: #f0f0f0;
-  color: #000000;
+ion-button[disabled] {
+  background-color: #cccccc;
 }
 
 .initial-page .places-list {
@@ -118,23 +86,8 @@ ion-searchbar {
   gap: 20px;
   overflow-x: auto;
   padding: 10px 20px;
-  white-space: nowrap;
-  scrollbar-width: thin;
 }
 
-.initial-page .places-list::-webkit-scrollbar {
-  height: 8px;
-  color: transparent;
-}
-.initial-page .places-list::-webkit-scrollbar-thumb {
-  background-color: #cccccc;
-  border-radius: 4px;
-}
-.initial-page .places-list::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-  
 .initial-page .places-list .place-card {
   scroll-behavior: smooth;
   position: relative;
@@ -202,40 +155,6 @@ ion-searchbar {
   font-size: 14px;
 }
 
-ion-tab-bar {
-  --background: transparent;
-  --border: none;
-}
-
-ion-tab-button {
-  position: relative;
-}
-
-ion-tab-button ion-icon {
-  color: #ffffff;
-  font-size: 24px;
-  transition: color 0.3s ease;
-}
-
-ion-tab-button.tab-selected::after {
-  content: '';
-  position: absolute;
-  bottom: 0px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 8px;
-  background-color: #007bff;
-  border-radius: 50%;
-}
-
-ion-tab-button.tab-selected ion-icon {
-  color: #ffffff;
-}
-.place-card {
-  position: relative;
-}
-
 .favorite-btn {
   position: absolute;
   top: 10px;
@@ -248,9 +167,18 @@ ion-tab-button.tab-selected ion-icon {
 
 .favorite-btn ion-icon {
   font-size: 23px;
-  color: #ffffff
+  color: #ffffff;
 }
 
 .favorite-btn:hover {
   background: #ffffff;
+}
+
+ion-fab {
+  margin-bottom: 50px;
+
+  ion-icon{ 
+    color: #ffffff;
+    stroke-width: 3px;
+  }
 }

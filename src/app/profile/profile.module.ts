@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
 import { ProfilePageRoutingModule } from './profile-routing.module';
 
+import { FooterModule } from '../components/footer/footer.components.module';
 import { ProfilePage } from './profile.page';
 
 @NgModule({
@@ -13,8 +14,12 @@ import { ProfilePage } from './profile.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfilePageRoutingModule
+    ProfilePageRoutingModule,
+    FooterModule
   ],
-  declarations: [ProfilePage]
+  declarations: [
+    ProfilePage,
+  ],
 })
 export class ProfilePageModule {}
+

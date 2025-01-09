@@ -7,28 +7,42 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
-  email: string = 'duartedx10@gmail.com';
-  password: string = '123';
-  authMode: string = 'login';
+  email: string = '';
+  password: string = '';
+  errorMessage: string = '';
+  authMode: string = 'login'; // Alternar entre "login" e "signup"
 
   constructor(private router: Router) {}
 
   onLogin() {
+    this.clearErrorMessage();
+
     if (!this.email || !this.password) {
-      console.log('Por favor, preencha todos os campos!');
+      this.errorMessage = 'Por favor, preencha todos os campos!';
       return;
     }
-  
-    // Simular uma verificação simples (substituir com autenticação real depois)
-    if (this.email === 'duartedx10@gmail.com' && this.password === '123') {
-      this.router.navigate(['/home']); // Redireciona para a página principal
+
+    if (this.isValidUser(this.email, this.password)) {
+      console.log('Login bem-sucedido!');
+      this.router.navigate(['/home']);
     } else {
-      console.log('Email ou password incorretos!');
+      this.errorMessage = 'Email ou password incorretos!';
     }
   }
-  
 
   onSignUp() {
+    this.clearErrorMessage();
     console.log('Funcionalidade de registo ainda não implementada.');
+  }
+
+  private isValidUser(email: string, password: string): boolean {
+    const predefinedEmail = 'tobi@gmail.com';
+    const predefinedPassword = '123';
+
+    return email === predefinedEmail && password === predefinedPassword;
+  }
+
+  private clearErrorMessage() {
+    this.errorMessage = '';
   }
 }
