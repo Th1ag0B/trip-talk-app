@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
-import { AuthService } from './auth.service';
+import { AuthService } from '../auth/auth.service';
 
 export interface Event {
   id: string;
@@ -43,34 +43,29 @@ export class EventService {
   /**
    * Create a new event
    */
-  createEvent(eventData: Partial<Event>): Observable<Event> {
+  createEvent(eventData: FormData): Observable<Event> {
     return this.authService.checkAuth().pipe(
       switchMap((authResponse) => {
         if (!authResponse.isAuthenticated || !authResponse.user?.id) {
           return throwError(() => new Error('User not authenticated'));
         }
-
-        const eventToCreate = {
-          ...eventData,
-          createdById: authResponse.user.id
-        };
-
-        console.log('Sending event data:', eventToCreate);
-
-        return this.http.post<Event>(`${this.apiUrl}/create`, eventToCreate, { withCredentials: true })
-          .pipe(catchError(this.handleError));
+  
+        return this.http.post<Event>(`${this.apiUrl}/create`, eventData, {
+          withCredentials: true,
+        }).pipe(catchError(this.handleError));
       })
     );
   }
+  
 
   /**
    * Edit an existing event by ID
    */
-  editEvent(id: string, eventData: Partial<Event>): Observable<Event> {
-    return this.http
-      .put<Event>(`${this.apiUrl}/edit/${id}`, eventData)
-      .pipe(catchError(this.handleError));
-  }
+  editEvent(id: string, eventData: FormData): Observable<Event> {
+  return this.http
+  .put<Event>(`${this.apiUrl}/edit/${id}`, eventData)
+  .pipe(catchError(this.handleError));
+}
 
   /**
    * Delete an event by ID

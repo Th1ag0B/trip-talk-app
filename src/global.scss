@@ -39,3 +39,13 @@
 html {
     --background: linear-gradient(to top, #003366, #0055cc);
 }
+
+@font-face {
+    font-family: 'Righteous-Regular';
+    src: url(../../assets/font/Righteous-Regular.ttf) format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'WorkSans-Regular';
+    src: url(../../assets/font/WorkSans-Regular.ttf) format('truetype');
+  }

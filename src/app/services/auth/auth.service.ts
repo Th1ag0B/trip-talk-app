@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Observable, of } from 'rxjs'; // Add 'of' import
 import { catchError } from 'rxjs/operators'; // Add catchError import
 
@@ -24,16 +24,13 @@ export class AuthService {
 
   // Check authentication status
   checkAuth(): Observable<AuthResponse> {
-    return this.http.get<AuthResponse>(`${this.baseUrl}/check`, {
-      withCredentials: true,
-    }).pipe(
+    return this.http.get<AuthResponse>(`${this.baseUrl}/check`, { withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Auth check error:', error);
         return of({ isAuthenticated: false, user: null });
       })
     );
   }
-  
 
   // Login method
   login(email: string, password: string): Observable<any> {

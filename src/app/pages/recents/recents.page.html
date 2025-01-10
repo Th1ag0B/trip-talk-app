@@ -4,14 +4,14 @@
   </ion-refresher>
 
   <div class="welcome-header">
-    <h2>Add New Event!</h2>
+    <h2>{{ editingEventId ? 'Edit Event' : 'Add New Event!' }}</h2>
     <div class="user-profile">
       <img src="../assets/imagem/Tobipfp.png" alt="Profile" />
     </div>
   </div>
 
   <div *ngIf="showForm" class="form-container">
-    <form [formGroup]="eventForm" (ngSubmit)="addEvent()">
+    <form [formGroup]="eventForm" (ngSubmit)="saveEvent()">
       <ion-item>
         <ion-label position="floating">Name</ion-label>
         <ion-input formControlName="name"></ion-input>
@@ -41,7 +41,7 @@
           <div slot="title">Select Start Date</div>
         </ion-datetime>
       </ion-item>
-      
+
       <ion-item>
         <ion-label position="stacked">End Date</ion-label>
         <ion-datetime
@@ -59,23 +59,9 @@
       </ion-item>
 
       <ion-button type="submit" expand="full" [disabled]="!eventForm.valid" class="submit-button">
-        Add Event
+        {{ editingEventId ? 'Save Changes' : 'Add Event' }}
       </ion-button>
     </form>
-  </div>
-
-  <!-- Loading skeleton -->
-  <div *ngIf="isLoading" class="ion-padding">
-    <ion-skeleton-text animated style="width: 60%; height: 30px; margin-bottom: 10px;"></ion-skeleton-text>
-    <ion-skeleton-text animated style="width: 90%; height: 100px; margin-bottom: 10px;"></ion-skeleton-text>
-    <ion-skeleton-text animated style="width: 90%; height: 100px;"></ion-skeleton-text>
-  </div>
-
-  <!-- Empty state message -->
-  <div *ngIf="!isLoading && events.length === 0" class="empty-state">
-    <ion-icon name="calendar-outline" class="empty-icon"></ion-icon>
-    <h3>No Travels found</h3>
-    <p>Click the + button to add your first event!</p>
   </div>
 
   <!-- Events list -->
@@ -87,6 +73,9 @@
             <ion-card-title>{{ event.name }}</ion-card-title>
             <ion-card-subtitle>{{ event.destiny }}</ion-card-subtitle>
           </ion-label>
+          <ion-button slot="end" fill="clear" color="primary" (click)="startEditing(event)">
+            <ion-icon name="pencil-outline"></ion-icon>
+          </ion-button>
           <ion-button slot="end" fill="clear" color="danger" (click)="deleteEvent(event.id)">
             <ion-icon name="trash-outline"></ion-icon>
           </ion-button>
@@ -95,13 +84,11 @@
 
       <ion-card-content>
         <p *ngIf="event.description" class="description">{{ event.description }}</p>
-        
         <div class="date-info">
           <ion-chip outline color="primary">
             <ion-icon name="time-outline"></ion-icon>
             <ion-label>{{ getDuration(event.startDate, event.endDate) }}</ion-label>
           </ion-chip>
-          
           <div class="dates">
             <p>
               <ion-icon name="calendar-outline"></ion-icon>
@@ -112,12 +99,6 @@
               <ion-text color="medium"> End: {{ formatDate(event.endDate) }}</ion-text>
             </p>
           </div>
-        </div>
-        
-        <div class="created-info">
-          <ion-text color="medium">
-            <small>Created {{ formatDate(event.createdAt) }}</small>
-          </ion-text>
         </div>
       </ion-card-content>
     </ion-card>

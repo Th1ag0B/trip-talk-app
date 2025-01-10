@@ -101,15 +101,18 @@ ion-button[disabled] {
   opacity: 0.7;
 }
 
-/* DateTime styles */
 ion-datetime.custom-datetime {
   --background: #ffffff;
   --ion-color-base: #0055cc;
   --ion-color-contrast: #ffffff;
   border-radius: 12px;
-  margin: 10px 0;
-  max-height: none;
+  margin: 10px auto; /* Center the datetime */
+  max-width: 400px; /* Restrict width for smaller modals */
+  width: 90%; /* Responsive width */
+  max-height: 300px; /* Reduce modal height */
   color: #333333;
+  padding: 10px; /* Add padding for better aesthetics */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
 }
 
 .datetime-modal {
@@ -117,21 +120,27 @@ ion-datetime.custom-datetime {
   --max-height: 80vh;
   --border-radius: 16px;
   --background: #ffffff;
+  max-width: 400px; /* Constrain width */
+  margin: auto; /* Center the modal */
 }
 
 ion-datetime::part(header) {
   background: #0055cc;
   color: #ffffff;
-  padding: 16px;
+  padding: 12px; /* Slightly smaller padding */
+  font-size: 16px; /* Smaller font size */
+  text-align: center; /* Center align the header */
 }
 
 ion-datetime::part(calendar-day) {
   color: #333333;
+  font-size: 12px; /* Make day text smaller */
 }
 
 ion-datetime::part(calendar-day.today) {
   color: #0055cc;
   font-weight: bold;
+  font-size: 14px; /* Slightly larger for emphasis */
 }
 
 ion-datetime::part(calendar-day.selected) {
@@ -143,6 +152,24 @@ ion-datetime::part(calendar-day.selected) {
 ion-datetime::part(button) {
   color: #0055cc;
   font-weight: 600;
+  font-size: 14px;
+  padding: 5px 10px; /* Smaller button padding */
+}
+
+.datetime-modal::part(container) {
+  margin: auto; /* Center align the container */
+  padding: 10px; /* Add padding for better look */
+  border-radius: 12px; /* Adjust radius for a modern look */
+  max-width: 400px; /* Constrain modal width */
+}
+
+ion-datetime::part(month-year-picker) {
+  font-size: 14px;
+  margin: 0;
+}
+
+ion-datetime::part(calendar-container) {
+  font-size: 12px; /* Adjust size for compact view */
 }
 
 /* Event list styles */
@@ -182,6 +209,15 @@ ion-fab {
 ion-fab-button {
   --background: #0055cc;
   --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* General modal adjustments for compact view */
+ion-modal {
+  --height: auto;
+  --max-width: 350px;
+  --width: 90%;
+  --border-radius: 16px;
+  margin: auto;
+  padding: 0;
 }
 
 /* Loading and empty states */
