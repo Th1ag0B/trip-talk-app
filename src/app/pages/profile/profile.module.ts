@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ProfilePageRoutingModule } from './profile-routing.module';
 
-import { FooterModule } from '../components/footer/footer.components.module';
+import { FooterModule } from '../../components/footer/footer.components.module';
 import { ProfilePage } from './profile.page';
 
 @NgModule({

@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FavoritesPageRoutingModule } from './favorites-routing.module';
 
 
-import { FooterModule } from '../components/footer/footer.components.module';
+import { FooterModule } from '../../components/footer/footer.components.module';
 import { FavoritesPage } from './favorites.page';
 
 @NgModule({

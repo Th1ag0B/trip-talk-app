@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { RecentsPageRoutingModule } from './recents-routing.module';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { FooterModule } from '../components/footer/footer.components.module';
+import { FooterModule } from '../../components/footer/footer.components.module';
 import { RecentsPage } from './recents.page';
 
 @NgModule({

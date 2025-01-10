@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router'; // Import Router for navigation
 
 @Component({
   selector: 'app-profile',
@@ -8,7 +9,10 @@ import { AlertController } from '@ionic/angular';
 })
 export class ProfilePage implements OnInit {
 
-  constructor(private alertController: AlertController) { }
+  constructor(
+    private alertController: AlertController,
+    private router: Router // Inject Router to handle navigation
+  ) { }
 
   async presentLogoutModal() {
     const alert = await this.alertController.create({
@@ -32,10 +36,17 @@ export class ProfilePage implements OnInit {
   }
 
   logout() {
-    window.location.href = '/login'; // Redireciona para a página de login
+    // Assuming the token is stored in cookies or local storage
+    // Remove token from local storage or cookies (update based on your storage method)
+    localStorage.removeItem('token'); // If token is stored in localStorage
+    // OR for cookies
+    // document.cookie = 'token=; Max-Age=0; path=/'; 
+
+    // Redirect to the login page
+    this.router.navigate(['/login']); // Use Angular Router for navigation instead of window.location.href
   }
+
   ngOnInit() {
-    
   }
 
 }
