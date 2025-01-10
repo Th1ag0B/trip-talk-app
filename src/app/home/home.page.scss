@@ -258,9 +258,14 @@ ion-tab-button.tab-selected ion-icon {
 
 .favorite-btn ion-icon {
   font-size: 23px;
-  color: #ffffff
+  color: #ffffff;
+  transition: color 0.3s ease;
 }
 
-.favorite-btn:hover {
-  background: #ffffff;
+.favorite-btn ion-icon:hover {
+  color: #ffffff; /* Cor mantida ao passar o mouse */
+}
+
+.favorite-btn ion-icon.heart-filled {
+  color: #ffffff; /* Cor para o ícone preenchido */
 }
