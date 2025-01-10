@@ -4,7 +4,7 @@
     <p>Explore the world</p>
 
     <div class="user-profile">
-      <img src="../assets/imagem/Tobipfp.png" href="#" alt="Profile" />
+      <img src="../assets/imagem/Tobipfp.png" alt="Profile" click="goToProfile()"/>
     </div>
   </div>
 
@@ -12,7 +12,7 @@
 
   <div class="popular-header">
     <h1>Popular</h1>
-    <button class="view-all" href="#">View All</button>
+    <button class="view-all">View All</button>
   </div>
 
   <div class="button-group">
@@ -22,9 +22,9 @@
       Most Views
     </button>
     <button
-      (click)="selectButton('nearby')"
-      [ngClass]="{'active': selectedButton === 'nearby'}">
-      Nearby
+      (click)="selectButton('recent')"
+      [ngClass]="{'active': selectedButton === 'recent'}">
+      Recent
     </button>
     <button
       (click)="selectButton('latest')"

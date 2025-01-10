@@ -86,6 +86,7 @@ ion-button[disabled] {
   gap: 20px;
   overflow-x: auto;
   padding: 10px 20px;
+
 }
 
 .initial-page .places-list .place-card {
@@ -95,6 +96,8 @@ ion-button[disabled] {
   height: 250px;
   border-radius: 15px;
   overflow: hidden;
+  position: relative;
+  z-index: 9999;
 }
 
 .initial-page .places-list .place-card ion-img {
