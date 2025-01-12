@@ -39,3 +39,69 @@
 html {
     --background: linear-gradient(to top, #003366, #0055cc);
 }
+
+@font-face {
+    font-family: 'Righteous-Regular';
+    src: url(assets/font/Righteous-Regular.ttf) format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'WorkSans-Regular';
+    src: url(assets/font/WorkSans-Regular.ttf) format('truetype');
+  }
+
+.modal {
+  --font-family: 'Righteous-Regular" ';
+  --align-items: center;
+  --background: linear-gradient(to top, #003366, #0055cc);
+  --color: #ffffff;
+  --border-radius: 50px;
+  --padding: 16px;
+  --text-align: center;
+
+  .alert-title {
+    font-family: 'Righteous-Regular';
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  .alert-message {
+    font-family: 'WorkSans-Regular';
+    font-size: 16px;
+    color: #ffffff;
+  }
+
+  .cancel-button {
+    font-family: 'Righteous-Regular';
+    font-size: 14px;
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  .exit-button {
+    font-family: 'Righteous-Regular';
+    font-size: 14px;
+    color: red;
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  .cancel-button, .exit-button {
+    margin: 10px;
+  }
+
+  .save-button {
+    font-family: 'Righteous-Regular';
+    font-size: 14px;
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  .placeholders {
+    font-family: 'Righteous-Regular';
+    font-size: 14px;
+    color: #ffffff;
+    border-color: transparent;
+  }
+}

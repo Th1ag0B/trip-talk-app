@@ -9,8 +9,8 @@ import { FooterComponent } from './footer.component';
   imports: [
     CommonModule,
     RouterModule,
-    IonicModule, // Não se esqueça de importar o IonicModule
+    IonicModule,
   ],
-  exports: [FooterComponent] // Exporta o FooterComponent para ser usado em outros módulos
+  exports: [FooterComponent]
 })
 export class FooterModule {}

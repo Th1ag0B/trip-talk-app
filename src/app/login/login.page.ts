@@ -10,7 +10,7 @@ export class LoginPage {
   email: string = '';
   password: string = '';
   errorMessage: string = '';
-  authMode: string = 'login'; // Alternar entre "login" e "signup"
+  authMode: string = 'login';
 
   constructor(private router: Router) {}
 

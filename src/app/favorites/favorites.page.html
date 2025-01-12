@@ -1,123 +1,34 @@
 <ion-content class="initial-page">
   <div class="welcome-header">
     <h2>Favorites</h2>
-
     <div class="user-profile">
-      <img src="../assets/imagem/Tobipfp.png" href="#" alt="Profile" />
+      <img src="../assets/imagem/Tobipfp.png" alt="Profile" (click)="goToProfile()">
     </div>
-  
-  <ion-searchbar animated="true" placeholder="Search places"></ion-searchbar>
+  </div>
 
   <div class="places-list">
-    <ion-card class="place-card">
-      <ion-img src="assets/imagem/mount-fuji.jpg"></ion-img>
+    <ion-card class="place-card" *ngFor="let place of places; let i = index">
+      <ion-img [src]="place.image"></ion-img>
       <div class="place-info">
-        <h2>Mount Fuji, Tokyo</h2>
+        <h2>{{ place.name }}</h2>
         <div class="location">
           <ion-icon name="location-outline"></ion-icon>
-          <p>Japan</p>
+          <p>{{ place.location }}</p>
         </div>
         <div class="rating">
           <ion-icon name="star-outline"></ion-icon>
-          <span>4.8</span>
+          <span>{{ place.rating }}</span>
         </div>
       </div>
 
       <div class="favorite-btn">
-        <ion-icon name="heart-outline"></ion-icon>
+        <ion-icon
+          [name]="favorites[i] ? 'heart' : 'heart-outline'"
+          (click)="toggleFavorite(i)">
+        </ion-icon>
       </div>
     </ion-card>
+  </div>
 
-    <ion-card class="place-card">
-      <ion-img src="assets/imagem/paris.jpg"></ion-img>
-      <div class="place-info">
-        <h2>Tower Eifell, Paris</h2>
-        <div class="location">
-          <ion-icon name="location-outline"></ion-icon>
-          <p>France</p>
-        </div>
-        <div class="rating">
-          <ion-icon name="star-outline"></ion-icon>
-          <span>4.7</span>
-        </div>
-      </div>
-
-      <div class="favorite-btn">
-        <ion-icon name="heart-outline"></ion-icon>
-      </div>
-    </ion-card>
-
-    <ion-card class="place-card">
-      <ion-img src="assets/imagem/casa-de-la-moneda.jpg"></ion-img>
-      <div class="place-info">
-        <h2>Casa de la Moneda, Madrid</h2>
-        <div class="location">
-          <ion-icon name="location-outline"></ion-icon>
-          <p>Spain</p>
-        </div>
-        <div class="rating">
-          <ion-icon name="star-outline"></ion-icon>
-          <span>4.7</span>
-        </div>
-      </div>
-
-      <div class="favorite-btn">
-        <ion-icon name="heart-outline"></ion-icon>
-      </div>
-    </ion-card>
-
-    <ion-card class="place-card">
-      <ion-img src="assets/imagem/ptl.jpg"></ion-img>
-      <div class="place-info">
-        <h2>Ponte de Lima, Viana do Castelo</h2>
-        <div class="location">
-          <ion-icon name="location-outline"></ion-icon>
-          <p>Portugal</p>
-        </div>
-        <div class="rating">
-          <ion-icon name="star-outline"></ion-icon>
-          <span>4.7</span>
-        </div>
-      </div>
-
-      <div class="favorite-btn">
-        <ion-icon name="heart-outline"></ion-icon>
-      </div>
-    </ion-card>
-
-    <ion-card class="place-card">
-      <ion-img src="assets\imagem\big-ben.jpg"></ion-img>
-      <div class="place-info">
-        <h2>Big Ben, Londron</h2>
-        <div class="location">
-          <ion-icon name="location-outline"></ion-icon>
-          <p>England</p>
-        </div>
-        <div class="rating">
-          <ion-icon name="star-outline"></ion-icon>
-          <span>4.7</span>
-        </div>
-      </div>
-
-      <div class="favorite-btn">
-        <ion-icon name="heart-outline"></ion-icon>
-      </div>
-    </ion-card>
-
-      <ion-card class="place-card">
-        <ion-img src="assets/imagem/coliseu-roma.jpg"></ion-img>
-        <div class="place-info">
-          <h2>The Coliseum, Roma</h2>
-          <div class="location">
-            <ion-icon name="location-outline"></ion-icon>
-            <p>Italy</p>
-          </div>
-          <div class="rating">
-            <ion-icon name="star-outline"></ion-icon>
-            <span>4.7</span>
-          </div>
-        </div>
-    </ion-card>
-
-<app-footer></app-footer>
-
+  <app-footer></app-footer>
+</ion-content>

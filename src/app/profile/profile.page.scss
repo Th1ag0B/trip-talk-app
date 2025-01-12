@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'Righteous-Regular';
+    src: url(../../assets/font/Righteous-Regular.ttf) format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'WorkSans-Regular';
+    src: url(../../assets/font/WorkSans-Regular.ttf) format('truetype');
+  }
+
 .profile-container {
     --background: linear-gradient(to top, #003366, #0055cc);
     background: var(--background);
@@ -6,23 +16,18 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     font-family: Arial, sans-serif;
-}
-
-@font-face {
-    font-family: 'Righteous-Regular';
-    src: url(../../assets/font/Righteous-Regular.ttf) format('truetype');
-}
-
-@font-face {
-    font-family: 'WorkSans-Regular';
-    src: url(../../assets/font/WorkSans-Regular.ttf) format('truetype');
+    overflow: hidden;
 }
 
 .profile-header {
     position: relative;
     padding: 20px 0;
+}
+
+.profile-header ion-icon {
+    color: #ffffff;
 }
 
 .profile-header h2 {
@@ -65,38 +70,42 @@
     background-color: #ffffff;
     color: #000000;
     border-radius: 20px;
-    padding: 10px 0;
+    padding: 2px 0px;
     margin: 0 auto;
-    width: 90%;
+    width: 50%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    margin-bottom: 80px;
 }
 
-.profile-options button {
+.profile-options ion-button {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     border: none;
     background: none;
-    padding: 15px 20px;
-    font-size: 16px;
+    padding: 10px 15px;
+    font-size: 14px;
     cursor: pointer;
     color: inherit;
+    outline: none;
+    z-index: 10;
 }
 
-.profile-options button:hover {
+.profile-options ion-button:hover {
     background-color: #c2bfbf;
     border-radius: 10px;
 }
 
-.profile-options button ion-icon:first-child {
+.profile-options ion-button ion-icon:first-child {
     margin-right: 10px;
     font-size: 20px;
 }
 
-.profile-options button ion-icon:last-child {
+.profile-options ion-button ion-icon:last-child {
     font-size: 16px;
     color: #cfcfcf;
 }
@@ -107,6 +116,8 @@
     padding: 15px 0;
     background-color: #003366;
     border-top: 1px solid #0055cc;
+    position: relative;
+    z-index: 1;
 }
 
 .footer ion-icon {
@@ -114,3 +125,4 @@
     color: #ffffff;
     cursor: pointer;
 }
+

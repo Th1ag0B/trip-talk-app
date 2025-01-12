@@ -3,12 +3,11 @@
     <h2>Add New Places!</h2>
 
     <div class="user-profile">
-      <img src="../assets/imagem/Tobipfp.png" href="#" alt="Profile" />
+      <img src="../assets/imagem/Tobipfp.png" href="#" alt="Profile" (click)="goToProfile()">
     </div>
 
   </div>
 
-  <!-- Mostrar o formulário apenas quando showForm for true -->
   <div *ngIf="showForm">
     <form [formGroup]="travelForm" (ngSubmit)="addEvent()">
       <ion-item>
@@ -44,7 +43,7 @@
   </div>
   
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="toggleForm()">
+    <ion-fab-button color="custom-blue" (click)="toggleForm()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

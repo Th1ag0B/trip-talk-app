@@ -1,13 +1,13 @@
 <div class="profile-container">
   <div class="profile-header">
     <ion-fab slot="fixed" vertical="top" horizontal="end">
-      <ion-fab-button (click)="presentLogoutModal()">
+      <ion-fab-button color="custom" (click)="presentLogoutModal()">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab>
     <h2>Account</h2>
   </div>
-  
+
   <div class="initial-page">
     <div class="user-profile">
       <img src="../assets/imagem/Tobipfp.png" alt="Profile Picture" />
@@ -15,26 +15,26 @@
     <p class="user-name">Tobi</p>
     <p class="user-email">tobigmail.com</p>
     <div class="profile-options">
-      <button onclick="window.location.href='profile.html'">
+      <ion-button color="custom" (click)="profileModal()">
         <ion-icon name="person-outline"></ion-icon> <span>Profile</span>
         <ion-icon name="chevron-forward-outline"></ion-icon>
-      </button>
-      <button onclick="window.location.href='bookmarked.html'">
+      </ion-button>
+      <ion-button color="custom" (click)="commentariesModal()">
         <ion-icon name="chatbubble-ellipses-outline"></ion-icon> <span>Commentaries</span>
         <ion-icon name="chevron-forward-outline"></ion-icon>
-      </button>
-      <button onclick="window.location.href='trips.html'">
+      </ion-button>
+      <ion-button color="custom" (click)="scheduleModal()">
         <ion-icon name="calendar-outline"></ion-icon><span>Schedule</span>
         <ion-icon name="chevron-forward-outline"></ion-icon>
-      </button>
-      <button onclick="window.location.href='settings.html'">
+      </ion-button>
+      <ion-button color="custom" (click)="settingsModal()">
         <ion-icon name="settings-outline"></ion-icon> <span>Settings</span>
         <ion-icon name="chevron-forward-outline"></ion-icon>
-      </button>
-      <button onclick="window.location.href='version.html'">
+      </ion-button>
+      <ion-button color="custom" (click)="versionModal()">
         <ion-icon name="information-circle-outline"></ion-icon> <span>Version</span>
         <ion-icon name="chevron-forward-outline"></ion-icon>
-      </button>
+      </ion-button>
     </div>
   </div>
   <app-footer></app-footer>
