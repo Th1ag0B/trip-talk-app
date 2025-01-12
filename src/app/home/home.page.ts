@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class HomePage {
   selectedButton: string = 'mostViews';
   selectedTab: string = 'Home';
-  favorites: boolean[] = Array(6).fill(false); // Supondo 6 itens populares na lista
+  favorites: boolean[] = Array(6).fill(false);
 
   constructor(private router: Router) {}
 
@@ -26,11 +26,6 @@ export class HomePage {
   }
 
   toggleFavorite(index: number) {
-    this.favorites[index] = !this.favorites[index]; // Alterna o estado de favorito
-  }
-
-  setFavorite(index: number) {
-    // Alterna entre verdadeiro e falso ao clicar
     this.favorites[index] = !this.favorites[index];
   }
 

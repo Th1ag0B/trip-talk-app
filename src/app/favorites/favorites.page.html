@@ -2,12 +2,11 @@
   <div class="welcome-header">
     <h2>Favorites</h2>
     <div class="user-profile">
-      <img src="../assets/imagem/Tobipfp.png" alt="Profile" />
+      <img src="../assets/imagem/Tobipfp.png" alt="Profile" (click)="goToProfile()">
     </div>
   </div>
 
   <div class="places-list">
-    <!-- Gerar os cartões dinamicamente -->
     <ion-card class="place-card" *ngFor="let place of places; let i = index">
       <ion-img [src]="place.image"></ion-img>
       <div class="place-info">
@@ -22,7 +21,6 @@
         </div>
       </div>
 
-      <!-- Botão de favorito com alternância dinâmica -->
       <div class="favorite-btn">
         <ion-icon
           [name]="favorites[i] ? 'heart' : 'heart-outline'"

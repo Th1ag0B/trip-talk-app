@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recents',
@@ -7,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./recents.page.scss'],
 })
 export class RecentsPage implements OnInit {
-  // Inicialização diretamente aqui
+
   travelForm: FormGroup = this.fb.group({
     title: ['', Validators.required],
     city: ['', Validators.required],
@@ -17,10 +18,13 @@ export class RecentsPage implements OnInit {
   showForm: boolean = false;
   travelEvents: any[] = [];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private router: Router)  { }
 
+  goToProfile() {
+    this.router.navigate(['/profile']);
+  }
   ngOnInit() {
-    // A inicialização foi movida para o construtor
+
   }
 
   addEvent() {

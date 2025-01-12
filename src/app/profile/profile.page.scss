@@ -16,9 +16,9 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;  /* Alinhamento flexível para permitir que o rodapé não seja coberto */
+    justify-content: flex-start;
     font-family: Arial, sans-serif;
-    overflow: hidden; /* Garantir que o conteúdo não extravasa */
+    overflow: hidden;
 }
 
 .profile-header {
@@ -70,14 +70,14 @@
     background-color: #ffffff;
     color: #000000;
     border-radius: 20px;
-    padding: 2px 0px;  /* Diminui o padding vertical para reduzir o espaço */
+    padding: 2px 0px;
     margin: 0 auto;
     width: 50%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
-    flex-grow: 1;  /* Permite que o conteúdo cresça, deixando o rodapé sempre visível */
-    margin-bottom: 80px; /* Garantir que o rodapé fique visível */
+    flex-grow: 1;
+    margin-bottom: 80px;
 }
 
 .profile-options ion-button {
@@ -87,8 +87,8 @@
     width: 100%;
     border: none;
     background: none;
-    padding: 10px 15px;  /* Diminui o padding para reduzir o tamanho do botão */
-    font-size: 14px;  /* Reduz o tamanho da fonte */
+    padding: 10px 15px;
+    font-size: 14px;
     cursor: pointer;
     color: inherit;
     outline: none;
@@ -125,3 +125,4 @@
     color: #ffffff;
     cursor: pointer;
 }
+

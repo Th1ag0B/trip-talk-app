@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-favorites',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./favorites.page.scss'],
 })
 export class FavoritesPage implements OnInit {
-  // Inicializa a lista de favoritos com valores padrão (não marcados)
+
   favorites: boolean[] = Array(6).fill(false);
 
-  // Lista de lugares
+
   places = [
     { name: 'Mount Fuji, Tokyo', location: 'Japan', rating: 4.8, image: 'assets/imagem/mount-fuji.jpg' },
     { name: 'Tower Eifell, Paris', location: 'France', rating: 4.7, image: 'assets/imagem/paris.jpg' },
@@ -19,11 +20,14 @@ export class FavoritesPage implements OnInit {
     { name: 'The Coliseum, Roma', location: 'Italy', rating: 4.7, image: 'assets/imagem/coliseu-roma.jpg' },
   ];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
+  goToProfile() {
+    this.router.navigate(['/profile']);
+  }
   ngOnInit() {}
 
-  // Alterna entre favorito e não favorito
+
   toggleFavorite(index: number) {
     this.favorites[index] = !this.favorites[index];
   }
