@@ -114,7 +114,7 @@ export class ProfilePage implements OnInit {
       this.logout();
     }
   }
-
+// for later
   logout() {
     this.authService.logout().subscribe(
       () => {
