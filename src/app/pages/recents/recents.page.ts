@@ -19,7 +19,7 @@ export class RecentsPage implements OnInit {
     
   });
 
-  selectedFile: File | null = null; // Declare selectedFile property
+  selectedFile: File | null = null; 
   showForm: boolean = false;
   editingEventId: string | null = null;
   events: Event[] = [];

@@ -16,7 +16,7 @@ export class ProfilePage implements OnInit {
   profileForm!: FormGroup;
   userId: string | null = null;
 
-  // Modal States
+
   isProfileModalOpen = false;
   isCommentariesModalOpen = false;
   isScheduleModalOpen = false;
@@ -29,7 +29,7 @@ export class ProfilePage implements OnInit {
     private userService: UserService,
     private commentsService: CommentsService,
     private router: Router,
-    private cdr: ChangeDetectorRef // For manual change detection
+    private cdr: ChangeDetectorRef 
   ) {}
 
   ngOnInit() {
@@ -68,10 +68,9 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  // Modal Handlers
   toggleProfileModal(open: boolean) {
     this.isProfileModalOpen = open;
-    this.cdr.detectChanges(); // Ensure UI updates
+    this.cdr.detectChanges(); 
   }
 
   toggleCommentariesModal(open: boolean) {

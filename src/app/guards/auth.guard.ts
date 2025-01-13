@@ -15,19 +15,16 @@ export class AuthGuard implements CanActivate {
       const authResponse = await firstValueFrom(this.authService.checkAuth());
       console.log('AuthGuard: Auth Response:', authResponse);
 
-      // Check if the user is authenticated
       if (authResponse?.isAuthenticated) {
         console.log('AuthGuard: User is authenticated.');
-        return true;  // Allow access to the route
+        return true;  
       } else {
-        // Handle case where user is not authenticated
         console.log('AuthGuard: User is not authenticated. Redirecting to login.');
         this.router.navigate(['/login']);
-        return false;  // Prevent navigation to the protected route
+        return false;  
       }
     } catch (error) {
       console.error('AuthGuard: Error during authentication check:', error);
-      // Redirect to login if there's an error
       this.router.navigate(['/login']);
       return false;
     }

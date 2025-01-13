@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ModalController } from '@ionic/angular'; 
 import { environment } from '../../../environments/environment';
-import { Observable, of } from 'rxjs'; // Add 'of' import
-import { catchError } from 'rxjs/operators'; // Add catchError import
+import { Observable, of } from 'rxjs'; 
+import { catchError } from 'rxjs/operators'; 
 
 interface AuthResponse {
   isAuthenticated: boolean;
@@ -13,7 +13,7 @@ interface AuthResponse {
     email: string;
     profilePictureUrl?: string;
   } | null;
-  token?: string; // Add token field
+  token?: string; 
 }
 
 
@@ -25,18 +25,16 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  // Check authentication status
   checkAuth(): Observable<AuthResponse> {
     return this.http.get<AuthResponse>(`${this.baseUrl}/check`, { withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Auth check error:', error);
-        // Return a default value when an error occurs
         return of({ isAuthenticated: false, user: null });
       })
     );
   }
 
-  // Login method
+  
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, 
       { email, password },
@@ -49,7 +47,6 @@ export class AuthService {
     );
   }
 
-  // Register method
   register(name: string, email: string, password: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/register`, 
       { name, email, password },
@@ -62,7 +59,6 @@ export class AuthService {
     );
   }
 
-  // Logout method
   logout(): Observable<any> {
     return this.http.post(`${this.baseUrl}/logout`, {}, {
       withCredentials: true
