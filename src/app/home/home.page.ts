@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService, Event } from '../services/events/events.service';
+import { AuthService } from '../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -14,23 +16,51 @@ export class HomePage implements OnInit {
   events: Event[] = [];
   searchTerm: string = '';
   loading = false;
-  userName: string = 'Tobi'; // You might want to get this from your auth service
-  favorites: string[] = []; // To store the list of favorite event IDs
+  userName: string = '';
+  favorites: string[] = [];
 
   constructor(
     private eventService: EventService,
+    private authService: AuthService,
     private router: Router,
     private loadingController: LoadingController,
     private toastController: ToastController
   ) {}
 
   ngOnInit() {
+    this.loadUserName();
     this.loadEvents();
+  }
+
+  async loadUserName() {
+    const loader = await this.loadingController.create({
+      message: 'Fetching user information...',
+    });
+    await loader.present();
+
+    this.authService.checkAuth().subscribe({
+      next: (response) => {
+        if (response.isAuthenticated && response.user) {
+          this.userName = response.user.name;
+        }
+        loader.dismiss();
+      },
+      error: async (error) => {
+        console.error('Error fetching user information:', error);
+        loader.dismiss();
+        const toast = await this.toastController.create({
+          message: 'Failed to load user information. Please try again.',
+          duration: 3000,
+          color: 'danger',
+        });
+        toast.present();
+      },
+    });
   }
 
   async loadEvents() {
     const loader = await this.loadingController.create({
-      message: 'Loading places...'
+      message: 'Loading places...',
     });
     await loader.present();
 
@@ -45,26 +75,53 @@ export class HomePage implements OnInit {
         const toast = await this.toastController.create({
           message: 'Error loading places. Please try again.',
           duration: 3000,
-          color: 'danger'
+          color: 'danger',
         });
         toast.present();
-      }
+      },
     });
+  }
+
+  async goToEventDetails(eventId: string) {
+    const loading = await this.loadingController.create({
+      message: 'Loading event details...',
+    });
+    await loading.present();
+
+    try {
+      const eventDetails = await firstValueFrom(this.eventService.getEventDetails(eventId));
+      console.log('Event Details:', eventDetails);
+      this.router.navigate(['/event-details', eventId]);
+    } catch (error) {
+      console.error('Error fetching event details:', error);
+      await this.showError('Error loading event details');
+    } finally {
+      await loading.dismiss();
+    }
+  }
+
+  async showError(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 3000,
+      color: 'danger',
+    });
+    toast.present();
   }
 
   sortEvents(events: Event[], criteria: string): Event[] {
     switch (criteria) {
       case 'recent':
-        return [...events].sort((a, b) => 
+        return [...events].sort((a, b) =>
           new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
         );
       case 'latest':
-        return [...events].sort((a, b) => 
+        return [...events].sort((a, b) =>
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
       case 'mostViews':
       default:
-        return events; // Assuming the backend sorts by views or maintain current order
+        return events;
     }
   }
 
@@ -76,41 +133,34 @@ export class HomePage implements OnInit {
   goToProfile() {
     this.router.navigate(['/profile']);
   }
-
-  goToTravelDetails(eventId: string) {
-    this.router.navigate(['/travels', eventId]);
+  viewAllPlaces() {
+    this.router.navigate(['/recents']);
   }
+  
 
   searchPlaces(event: any) {
     const searchTerm = event.target.value.toLowerCase();
     this.searchTerm = searchTerm;
   }
 
-  viewAllPlaces() {
-    this.router.navigate(['/recents']);
-  }
-
   async toggleFavorite(event: Event, cardEvent: MouseEvent) {
-    cardEvent.stopPropagation(); // Prevent card click event from triggering
-  
-    // Check if the event is already in the favorites
+    cardEvent.stopPropagation();
+
     const isFavorite = this.favorites.includes(event.id);
     const loader = await this.loadingController.create({
-      message: 'Updating favorite status...'
+      message: 'Updating favorite status...',
     });
     await loader.present();
-  
+
     if (isFavorite) {
-      // Remove from favorites
       this.eventService.removeFavorite(event.id).subscribe({
         next: async () => {
-          // Remove the event from the local favorites list
-          this.favorites = this.favorites.filter(fav => fav !== event.id);
+          this.favorites = this.favorites.filter((fav) => fav !== event.id);
           loader.dismiss();
           const toast = await this.toastController.create({
             message: 'Removed from favorites!',
             duration: 3000,
-            color: 'danger'
+            color: 'danger',
           });
           toast.present();
         },
@@ -120,46 +170,34 @@ export class HomePage implements OnInit {
           const toast = await this.toastController.create({
             message: 'Error removing from favorites. Please try again.',
             duration: 3000,
-            color: 'danger'
+            color: 'danger',
           });
           toast.present();
-        }
+        },
       });
     } else {
-      // Add to favorites
       this.eventService.addFavorite(event.id).subscribe({
         next: async () => {
-          // Add the event to the local favorites list
           this.favorites.push(event.id);
           loader.dismiss();
           const toast = await this.toastController.create({
             message: 'Added to favorites!',
             duration: 3000,
-            color: 'success'
+            color: 'success',
           });
           toast.present();
         },
         error: async (error) => {
           console.error('Error adding to favorites', error);
           loader.dismiss();
-  
-          // If the event is already in favorites, show a message without failing
-          if (error?.message === 'Event already favorited') {
-            const toast = await this.toastController.create({
-              message: 'This event is already in your favorites.',
-              duration: 3000,
-              color: 'warning'
-            });
-            toast.present();
-          } else {
-            const toast = await this.toastController.create({
-              message: 'Error adding to favorites. Please try again.',
-              duration: 3000,
-              color: 'danger'
-            });
-            toast.present();
-          }
-        }
+
+          const toast = await this.toastController.create({
+            message: 'Error adding to favorites. Please try again.',
+            duration: 3000,
+            color: 'danger',
+          });
+          toast.present();
+        },
       });
     }
   }

@@ -36,27 +36,27 @@
 
   <div class="places-list">
     <ion-card 
-      class="place-card" 
-      *ngFor="let event of events | filter:searchTerm"
-      (click)="goToTravelDetails(event.id)"
-    >
-      <ion-img [src]="event.destiny" [alt]="event.name"></ion-img>
-      <div class="place-info">
-        <h2>{{ event.name }}</h2>
-        <div class="location">
-          <ion-icon name="location-outline"></ion-icon>
-          <p>{{ event.destiny }}</p>
-        </div>
-        <div class="date-range">
-          <ion-icon name="calendar-outline"></ion-icon>
-          <span>{{ event.startDate | date:'shortDate' }} - {{ event.endDate | date:'shortDate' }}</span>
-        </div>
+    class="place-card" 
+    *ngFor="let event of events | filter:searchTerm"
+    (click)="goToEventDetails(event.id)"
+  >
+    <ion-img [src]="event.destiny" [alt]="event.name"></ion-img>
+    <div class="place-info">
+      <h2>{{ event.name }}</h2>
+      <div class="location">
+        <ion-icon name="location-outline"></ion-icon>
+        <p>{{ event.destiny }}</p>
       </div>
-
-      <button class="favorite-btn" (click)="toggleFavorite(event, $event)">
-        <ion-icon name="heart-outline"></ion-icon>
-      </button>
-    </ion-card>
+      <div class="date-range">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <span>{{ event.startDate | date:'shortDate' }} - {{ event.endDate | date:'shortDate' }}</span>
+      </div>
+    </div>
+  
+    <button class="favorite-btn" (click)="toggleFavorite(event, $event)">
+      <ion-icon name="heart-outline"></ion-icon>
+    </button>
+  </ion-card>
   </div>
 
   <app-footer></app-footer>
