@@ -1,0 +1,280 @@
+@font-face {
+    font-family: 'Righteous-Regular';
+    src: url(../../../assets/font/Righteous-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'WorkSans-Regular';
+    src: url(../../../assets/font/WorkSans-Regular.ttf) format('truetype');
+}
+
+.profile-container {
+    --background: linear-gradient(to top, #003366, #0055cc);
+    background: var(--background);
+    color: #fff;
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.profile-header {
+    position: relative;
+    padding: 20px 0;
+    z-index: 2;
+}
+
+.profile-header ion-icon {
+    color: #ffffff;
+}
+
+.profile-header h2 {
+    font-family: 'Righteous-Regular';
+    font-size: 26px;
+    margin: 0;
+    z-index: 1;
+}
+
+.user-profile {
+    margin: 10px auto;
+    width: 80px;
+    height: 80px;
+    position: relative;
+}
+
+.profile-picture-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid #ffffff;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+        transform: scale(1.05);
+        
+        .edit-overlay {
+            opacity: 1;
+        }
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .edit-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.6);
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+        opacity: 0;
+
+        ion-icon {
+            color: white;
+            font-size: 18px;
+        }
+    }
+
+    .upload-spinner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        ion-spinner {
+            --color: white;
+        }
+    }
+}
+
+.user-name {
+    font-family: 'WorkSans-Regular';
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.user-email {
+    font-family: 'WorkSans-Regular';
+    font-size: 14px;
+    color: #cfcfcf;
+    margin-bottom: 20px;
+}
+
+.profile-options {
+    font-family: 'WorkSans-Regular';
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 20px;
+    padding: 2px 0;
+    margin: 0 auto;
+    width: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-bottom: 80px;
+    position: relative;
+}
+
+.profile-options ion-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    color: inherit;
+    outline: none;
+    z-index: 10;
+
+    &:hover {
+        background-color: #c2bfbf;
+        border-radius: 10px;
+    }
+
+    ion-icon:first-child {
+        margin-right: 10px;
+        font-size: 20px;
+    }
+
+    ion-icon:last-child {
+        font-size: 16px;
+        color: #cfcfcf;
+    }
+}
+
+.footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    background-color: #003366;
+    border-top: 1px solid #0055cc;
+    position: relative;
+    z-index: 1;
+
+    ion-icon {
+        font-size: 24px;
+        color: #ffffff;
+        cursor: pointer;
+    }
+}
+
+// Modal Styles
+ion-modal {
+    --height: auto;
+    --width: 90%;
+    --max-width: 400px;
+    --border-radius: 16px;
+    --background: #ffffff;
+}
+
+ion-modal ion-header {
+    --background: #003366;
+    color: #ffffff;
+}
+
+ion-modal ion-content {
+    --padding-top: 20px;
+    --padding-bottom: 20px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+}
+
+ion-modal ion-item {
+    --padding-start: 0;
+    margin-bottom: 16px;
+}
+
+ion-modal ion-button {
+    margin-top: 20px;
+}
+
+// File Input Styles
+input[type="file"] {
+    display: none;
+}
+
+/* Optional improvements for mobile responsiveness */
+@media screen and (max-width: 768px) {
+    .profile-options {
+        width: 90%;
+    }
+    
+    .profile-header h2 {
+        font-size: 22px;
+    }
+
+    .user-profile {
+        width: 60px;
+        height: 60px;
+    }
+
+    .user-name {
+        font-size: 14px;
+    }
+
+    .user-email {
+        font-size: 12px;
+    }
+
+    ion-modal {
+        --width: 95%;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .profile-options {
+        background-color: #1a1a1a;
+        color: #ffffff;
+    }
+
+    .profile-options ion-button:hover {
+        background-color: #333333;
+    }
+
+    ion-modal {
+        --background: #1a1a1a;
+        color: #ffffff;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+    .profile-picture-wrapper {
+        .edit-overlay {
+            opacity: 1;
+            height: 40px; // Larger touch target
+        }
+
+        &:hover {
+            transform: none;
+        }
+    }
+
+    .profile-options ion-button {
+        padding: 15px; // Larger touch targets
+    }
+}

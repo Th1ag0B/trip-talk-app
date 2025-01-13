@@ -1,30 +1,31 @@
 <ion-content class="initial-page">
   <div class="welcome-header">
-    <h2>Hi, Tobi</h2>
-    <p>Explore the world</p>
-
+    <div class="welcome-text">
+      <h2>Hi, {{ userName }}</h2>
+      <p>Explore the world</p>
+    </div>
     <div class="user-profile">
-      <img src="../assets/imagem/Tobipfp.png" href="#" alt="Profile" />
+      <img src="../assets/imagem/Tobipfp.png" alt="Profile" (click)="goToProfile()"/>
     </div>
   </div>
 
-  <ion-searchbar animated="true" placeholder="Search places"></ion-searchbar>
+  <ion-searchbar 
+    animated="true" 
+    placeholder="Search places"
+    (ionInput)="searchPlaces($event)"
+    [debounce]="300"
+  ></ion-searchbar>
 
   <div class="popular-header">
     <h1>Popular</h1>
-    <button class="view-all" href="#">View All</button>
+    <button class="view-all" (click)="viewAllPlaces()">View All</button>
   </div>
 
   <div class="button-group">
     <button
-      (click)="selectButton('mostViews')"
-      [ngClass]="{'active': selectedButton === 'mostViews'}">
-      Most Views
-    </button>
-    <button
-      (click)="selectButton('nearby')"
-      [ngClass]="{'active': selectedButton === 'nearby'}">
-      Nearby
+      (click)="selectButton('recent')"
+      [ngClass]="{'active': selectedButton === 'recent'}">
+      Recent
     </button>
     <button
       (click)="selectButton('latest')"
@@ -34,118 +35,27 @@
   </div>
 
   <div class="places-list">
-    <ion-card class="place-card">
-      <ion-img src="assets/imagem/mount-fuji.jpg"></ion-img>
+    <ion-card 
+      class="place-card" 
+      *ngFor="let event of events | filter:searchTerm"
+      (click)="goToTravelDetails(event.id)"
+    >
+      <ion-img [src]="event.destiny" [alt]="event.name"></ion-img>
       <div class="place-info">
-        <h2>Mount Fuji, Tokyo</h2>
+        <h2>{{ event.name }}</h2>
         <div class="location">
           <ion-icon name="location-outline"></ion-icon>
-          <p>Japan</p>
+          <p>{{ event.destiny }}</p>
         </div>
-        <div class="rating">
-          <ion-icon name="star-outline"></ion-icon>
-          <span>4.8</span>
+        <div class="date-range">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>{{ event.startDate | date:'shortDate' }} - {{ event.endDate | date:'shortDate' }}</span>
         </div>
       </div>
 
-      <div class="favorite-btn">
+      <button class="favorite-btn" (click)="toggleFavorite(event, $event)">
         <ion-icon name="heart-outline"></ion-icon>
-      </div>
-    </ion-card>
-
-    <ion-card class="place-card">
-      <ion-img src="assets/imagem/paris.jpg"></ion-img>
-      <div class="place-info">
-        <h2>Tower Eifell, Paris</h2>
-        <div class="location">
-          <ion-icon name="location-outline"></ion-icon>
-          <p>France</p>
-        </div>
-        <div class="rating">
-          <ion-icon name="star-outline"></ion-icon>
-          <span>4.7</span>
-        </div>
-      </div>
-
-      <div class="favorite-btn">
-        <ion-icon name="heart-outline"></ion-icon>
-      </div>
-    </ion-card>
-
-    <ion-card class="place-card">
-      <ion-img src="assets/imagem/casa-de-la-moneda.jpg"></ion-img>
-      <div class="place-info">
-        <h2>Casa de la Moneda, Madrid</h2>
-        <div class="location">
-          <ion-icon name="location-outline"></ion-icon>
-          <p>Spain</p>
-        </div>
-        <div class="rating">
-          <ion-icon name="star-outline"></ion-icon>
-          <span>4.7</span>
-        </div>
-      </div>
-
-      <div class="favorite-btn">
-        <ion-icon name="heart-outline"></ion-icon>
-      </div>
-    </ion-card>
-
-    <ion-card class="place-card">
-      <ion-img src="assets/imagem/ptl.jpg"></ion-img>
-      <div class="place-info">
-        <h2>Ponte de Lima, Viana do Castelo</h2>
-        <div class="location">
-          <ion-icon name="location-outline"></ion-icon>
-          <p>Portugal</p>
-        </div>
-        <div class="rating">
-          <ion-icon name="star-outline"></ion-icon>
-          <span>4.7</span>
-        </div>
-      </div>
-
-      <div class="favorite-btn">
-        <ion-icon name="heart-outline"></ion-icon>
-      </div>
-    </ion-card>
-
-    <ion-card class="place-card">
-      <ion-img src="assets/imagem/big-ben.jpg"></ion-img>
-      <div class="place-info">
-        <h2>Big Ben, London</h2>
-        <div class="location">
-          <ion-icon name="location-outline"></ion-icon>
-          <p>England</p>
-        </div>
-        <div class="rating">
-          <ion-icon name="star-outline"></ion-icon>
-          <span>4.7</span>
-        </div>
-      </div>
-
-      <div class="favorite-btn">
-        <ion-icon name="heart-outline"></ion-icon>
-      </div>
-    </ion-card>
-
-    <ion-card class="place-card">
-      <ion-img src="assets/imagem/coliseu-roma.jpg"></ion-img>
-      <div class="place-info">
-        <h2>The Coliseum, Roma</h2>
-        <div class="location">
-          <ion-icon name="location-outline"></ion-icon>
-          <p>Italy</p>
-        </div>
-        <div class="rating">
-          <ion-icon name="star-outline"></ion-icon>
-          <span>4.7</span>
-        </div>
-      </div>
-
-      <div class="favorite-btn">
-        <ion-icon name="heart-outline"></ion-icon>
-      </div>
+      </button>
     </ion-card>
   </div>
 

@@ -1,0 +1,84 @@
+/* Custom toolbar styling */
+.custom-toolbar {
+  --background: var(--ion-color-primary);
+  --color: white;
+}
+
+.custom-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Card styling */
+.custom-card {
+  margin: 16px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--ion-color-light);
+}
+
+ion-card-header {
+  ion-card-title {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  ion-card-subtitle {
+    font-size: 14px;
+    color: var(--ion-color-medium);
+  }
+}
+
+/* Avatar styling */
+.comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--ion-color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 12px;
+}
+
+/* Empty state */
+.empty-state {
+  padding: 20px 0;
+}
+
+.empty-state ion-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+/* Comment input textarea */
+.comment-textarea {
+  background: var(--ion-background-color);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+/* Comment item styling */
+.comment-item {
+  margin: 8px 0;
+}
+
+.comment-item h3 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.comment-item p {
+  font-size: 14px;
+  color: var(--ion-color-dark);
+}
+
+.comment-item small {
+  font-size: 12px;
+  color: var(--ion-color-medium);
+}

@@ -1,0 +1,19 @@
+<ion-item>
+  <div class="comment-avatar" slot="start" *ngIf="currentUserId">
+    {{ getUserInitials(currentUserId) }}
+  </div>
+  <ion-input 
+    [(ngModel)]="newCommentContent" 
+    placeholder="Write a comment..."
+    (keyup.enter)="addComment()">
+  </ion-input>
+  <ion-button 
+    slot="end"
+    (click)="addComment()"
+    [disabled]="!newCommentContent.trim() || isAddingComment">
+    <ion-icon 
+      [name]="isAddingComment ? 'hourglass' : 'send'" 
+      slot="icon-only">
+    </ion-icon>
+  </ion-button>
+</ion-item>

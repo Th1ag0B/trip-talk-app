@@ -1,0 +1,52 @@
+<ion-content class="initial-page">
+  <div class="welcome-header">
+    <h2>Favorites</h2>
+    <div class="user-profile">
+      <img src="../assets/imagem/Tobipfp.png" alt="Profile"/>
+    </div>
+  </div>
+
+  <!-- Loading indicator -->
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <!-- No favorites message -->
+  <div *ngIf="!loading && favorites.length === 0" class="no-favorites">
+    <p>No favorite destinations yet.</p>
+  </div>
+
+  <!-- Favorites list -->
+  <div class="places-list" *ngIf="!loading && favorites.length > 0">
+    <ion-card class="place-card" *ngFor="let place of favorites" (click)="goToEventDetails(place.id)">
+      <div class="image-placeholder">
+        <ion-icon name="image-outline"></ion-icon>
+        <span>No image available</span>
+      </div>
+      
+      <div class="place-info">
+        <h2>{{ place.name }}</h2>
+        <div class="location">
+          <ion-icon name="location-outline"></ion-icon>
+          <p>{{ place.destiny }}</p>
+        </div>
+        <div class="date-info">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <p>{{ place.startDate | date:'mediumDate' }} - {{ place.endDate | date:'mediumDate' }}</p>
+        </div>
+        <div class="description" *ngIf="place.description">
+          <p>{{ place.description }}</p>
+        </div>
+      </div>
+
+      <div class="favorite-btn">
+        <ion-icon 
+          name="heart"
+          (click)="removeFavorite($event, place.id)">
+        </ion-icon>
+      </div>
+    </ion-card>
+  </div>
+
+  <app-footer></app-footer>
+</ion-content>

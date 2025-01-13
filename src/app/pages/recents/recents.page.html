@@ -1,0 +1,114 @@
+<ion-content class="initial-page">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="welcome-header">
+    <h2>{{ editingEventId ? 'Edit Event' : 'Add New Event!' }}</h2>
+    <div class="user-profile">
+      <img src="../assets/imagem/Tobipfp.png" alt="Profile" />
+    </div>
+  </div>
+
+  <div *ngIf="showForm" class="form-container">
+    <form [formGroup]="eventForm" (ngSubmit)="saveEvent()">
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-textarea formControlName="description" rows="3"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Destiny</ion-label>
+        <ion-input formControlName="destiny"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Start Date</ion-label>
+        <ion-datetime
+          formControlName="startDate"
+          presentation="date"
+          [preferWheel]="false"
+          class="custom-datetime"
+          [showDefaultButtons]="true"
+          doneText="Select"
+          cancelText="Cancel"
+        >
+          <div slot="title">Select Start Date</div>
+        </ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">End Date</ion-label>
+        <ion-datetime
+          formControlName="endDate"
+          presentation="date"
+          [preferWheel]="false"
+          class="custom-datetime"
+          [showDefaultButtons]="true"
+          doneText="Select"
+          cancelText="Cancel"
+          [min]="eventForm.get('startDate')?.value"
+        >
+          <div slot="title">Select End Date</div>
+        </ion-datetime>
+      </ion-item>
+
+      <ion-button type="submit" expand="full" [disabled]="!eventForm.valid" class="submit-button">
+        {{ editingEventId ? 'Save Changes' : 'Add Event' }}
+      </ion-button>
+    </form>
+  </div>
+
+  <!-- Events list -->
+  <div *ngIf="!isLoading && events.length > 0" class="event-list">
+    <ion-card *ngFor="let event of events" class="event-card">
+      <ion-card-header>
+        <ion-item lines="none">
+          <ion-label>
+            <ion-card-title>{{ event.name }}</ion-card-title>
+            <ion-card-subtitle>{{ event.destiny }}</ion-card-subtitle>
+          </ion-label>
+          <ion-button slot="end" fill="clear" color="primary" (click)="startEditing(event)">
+            <ion-icon name="pencil-outline"></ion-icon>
+          </ion-button>
+          <ion-button slot="end" fill="clear" color="danger" (click)="deleteEvent(event.id)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p *ngIf="event.description" class="description">{{ event.description }}</p>
+        <div class="date-info">
+          <ion-chip outline color="primary">
+            <ion-icon name="time-outline"></ion-icon>
+            <ion-label>{{ getDuration(event.startDate, event.endDate) }}</ion-label>
+          </ion-chip>
+          <div class="dates">
+            <p>
+              <ion-icon name="calendar-outline"></ion-icon>
+              <ion-text color="medium"> Start: {{ formatDate(event.startDate) }}</ion-text>
+            </p>
+            <p>
+              <ion-icon name="calendar-outline"></ion-icon>
+              <ion-text color="medium"> End: {{ formatDate(event.endDate) }}</ion-text>
+            </p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="toggleForm()">
+      <ion-icon [name]="showForm ? 'close' : 'add'"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <app-footer></app-footer>
+</ion-content>

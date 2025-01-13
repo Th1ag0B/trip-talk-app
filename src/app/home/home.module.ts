@@ -6,17 +6,16 @@ import { IonicModule } from '@ionic/angular';
 import { FooterModule } from '../components/footer/footer.components.module';
 import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
+import { FilterPipe } from '../fiter.pipe';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    IonicModule.forRoot(),
     HomePageRoutingModule,
     FooterModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, FilterPipe]
 })
 export class HomeModule {}
-
