@@ -1,3 +1,4 @@
+/* Enhanced page background */
 .initial-page {
   --background: linear-gradient(to top, #003366, #0055cc);
   color: #ffffff;
@@ -5,6 +6,10 @@
   padding: 20px;
   min-height: 100vh;
   position: relative;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  transition: background 0.5s ease-in-out;
 }
 
 /* Font imports */
@@ -23,6 +28,7 @@
   margin-top: 30px;
   margin-bottom: 30px;
   position: relative;
+  animation: fadeInUp 1s ease-out;
 }
 
 .welcome-header h2 {
@@ -31,6 +37,11 @@
   margin-left: 30px;
   font-size: 30px;
   margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.welcome-header h2:hover {
+  color: #ffcc00;
 }
 
 .welcome-header p {
@@ -41,6 +52,7 @@
   color: #cfcfcf;
 }
 
+/* User profile circle hover effect */
 .user-profile {
   position: absolute;
   top: 10px;
@@ -51,6 +63,12 @@
   overflow: hidden;
   border: 2px solid #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-profile:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .user-profile img {
@@ -59,10 +77,12 @@
   object-fit: cover;
 }
 
-/* Form styles */
+/* Form container */
 .form-container {
   margin-bottom: 100px;
   padding: 0 20px;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
 }
 
 form {
@@ -72,6 +92,7 @@ form {
   margin-bottom: 20px;
   color: #ffffff;
   backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 ion-item {
@@ -88,12 +109,19 @@ ion-item ion-textarea {
   --padding-start: 16px;
 }
 
+/* Button Styles */
 ion-button {
   --background: #0055cc;
   --color: white;
-  --border-radius: 20px;
+  --border-radius: 25px;
   margin-top: 20px;
   height: 48px;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+ion-button:hover {
+  background-color: #003366;
+  transform: translateY(-2px);
 }
 
 ion-button[disabled] {
@@ -101,78 +129,23 @@ ion-button[disabled] {
   opacity: 0.7;
 }
 
+/* DateTime styling */
 ion-datetime.custom-datetime {
   --background: #ffffff;
   --ion-color-base: #0055cc;
   --ion-color-contrast: #ffffff;
   border-radius: 12px;
-  margin: 10px auto; /* Center the datetime */
-  max-width: 400px; /* Restrict width for smaller modals */
-  width: 90%; /* Responsive width */
-  max-height: 300px; /* Reduce modal height */
+  margin: 10px auto;
+  max-width: 400px;
+  width: 90%;
+  max-height: 300px;
   color: #333333;
-  padding: 10px; /* Add padding for better aesthetics */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 1s ease-out;
 }
 
-.datetime-modal {
-  --height: auto;
-  --max-height: 80vh;
-  --border-radius: 16px;
-  --background: #ffffff;
-  max-width: 400px; /* Constrain width */
-  margin: auto; /* Center the modal */
-}
-
-ion-datetime::part(header) {
-  background: #0055cc;
-  color: #ffffff;
-  padding: 12px; /* Slightly smaller padding */
-  font-size: 16px; /* Smaller font size */
-  text-align: center; /* Center align the header */
-}
-
-ion-datetime::part(calendar-day) {
-  color: #333333;
-  font-size: 12px; /* Make day text smaller */
-}
-
-ion-datetime::part(calendar-day.today) {
-  color: #0055cc;
-  font-weight: bold;
-  font-size: 14px; /* Slightly larger for emphasis */
-}
-
-ion-datetime::part(calendar-day.selected) {
-  background: #0055cc;
-  color: #ffffff;
-  border-radius: 50%;
-}
-
-ion-datetime::part(button) {
-  color: #0055cc;
-  font-weight: 600;
-  font-size: 14px;
-  padding: 5px 10px; /* Smaller button padding */
-}
-
-.datetime-modal::part(container) {
-  margin: auto; /* Center align the container */
-  padding: 10px; /* Add padding for better look */
-  border-radius: 12px; /* Adjust radius for a modern look */
-  max-width: 400px; /* Constrain modal width */
-}
-
-ion-datetime::part(month-year-picker) {
-  font-size: 14px;
-  margin: 0;
-}
-
-ion-datetime::part(calendar-container) {
-  font-size: 12px; /* Adjust size for compact view */
-}
-
-/* Event list styles */
+/* Event List Styles */
 .event-list {
   margin-bottom: 100px;
   padding: 0 20px;
@@ -183,9 +156,34 @@ ion-datetime::part(calendar-container) {
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
 }
 
-/* Footer and FAB */
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+/* Floating action button */
+ion-fab {
+  position: fixed;
+  bottom: 70px !important;
+  right: 16px !important;
+  z-index: 999;
+  animation: fadeInUp 1s ease-out;
+}
+
+ion-fab-button {
+  --background: #0055cc;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+ion-fab-button:hover {
+  transform: scale(1.1);
+}
+
+/* Footer */
 app-footer {
   position: fixed;
   bottom: 0;
@@ -197,44 +195,6 @@ app-footer {
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   min-height: 56px;
-}
-
-ion-fab {
-  position: fixed;
-  bottom: 70px !important;
-  right: 16px !important;
-  z-index: 999;
-}
-
-ion-fab-button {
-  --background: #0055cc;
-  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-/* General modal adjustments for compact view */
-ion-modal {
-  --height: auto;
-  --max-width: 350px;
-  --width: 90%;
-  --border-radius: 16px;
-  margin: auto;
-  padding: 0;
-}
-
-/* Loading and empty states */
-.empty-state {
-  padding: 40px 20px;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.empty-state ion-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
-}
-
-/* Ensure content doesn't get hidden under footer */
-ion-content {
-  --padding-bottom: 80px;
 }
 
 /* Scrollbar styling */
@@ -254,4 +214,25 @@ ion-content {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.5);
+}
+
+/* Fade-in animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

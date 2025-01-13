@@ -34,8 +34,15 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/login/login.module').then((m) => m.LoginPageModule),
   },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Default route
-  { path: '**', redirectTo: '/login' }, // Fallback for unknown routes
+  {
+    path: 'event-details/:id',
+    loadChildren: () =>
+      import('./pages/travels/travels.module').then((m) => m.TravelsPageModule),
+    canActivate: [AuthGuard], // Protected route
+  },  
+  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Default route
+  { path: '**', redirectTo: '/home' }, // Wildcard route
+
 ];
 
 @NgModule({

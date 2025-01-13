@@ -1,8 +1,9 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { UserService } from '../../services/user/user.service';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
-import { UploadService } from '../../services/upload/upload.service';
+import { UserService } from '../../services/user/user.service';
+import { CommentsService } from '../../services/comments/comments.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -10,220 +11,119 @@ import { UploadService } from '../../services/upload/upload.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  @ViewChild('fileInput') fileInput!: ElementRef;
+  userData = { name: '', email: '', profilePictureUrl: '' };
+  userComments: Comment[] = [];
+  profileForm!: FormGroup;
+  userId: string | null = null;
 
-  userData: any = {};
-  isModalOpen = false;
-  userId: string = '';
-  currentPassword: string = '';
-  newPassword: string = '';
-  isUploading: boolean = false;
-  profilePictureFile: any;
+  // Modal States
+  isProfileModalOpen = false;
+  isCommentariesModalOpen = false;
+  isScheduleModalOpen = false;
+  isSettingsModalOpen = false;
+  isVersionModalOpen = false;
 
   constructor(
-    private alertController: AlertController,
-    private userService: UserService,
+    private formBuilder: FormBuilder,
     private authService: AuthService,
-    private uploadService: UploadService
-  ) { }
+    private userService: UserService,
+    private commentsService: CommentsService,
+    private router: Router,
+    private cdr: ChangeDetectorRef // For manual change detection
+  ) {}
 
   ngOnInit() {
-    this.loadUserInfo();
+    this.loadUserDetails();
+    this.initializeForm();
   }
 
-  loadUserInfo() {
-    this.authService.checkAuth().subscribe(
-      (response) => {
-        if (response.isAuthenticated && response.user) {
-          this.userData = response.user;
-          this.userId = response.user.id;
-        } else {
-          console.error('User is not authenticated');
-        }
-      },
-      (error) => {
-        console.error('Error loading user info:', error);
-      }
-    );
-  }
-
-  // Profile Picture Upload Methods
-  triggerFileInput() {
-    this.fileInput.nativeElement.click();
-  }
-
-  async handleProfilePictureChange(event: any) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    if (!file.type.startsWith('image/')) {
-      const alert = await this.alertController.create({
-        header: 'Invalid File',
-        message: 'Please select an image file.',
-        buttons: ['OK']
-      });
-      await alert.present();
-      return;
-    }
-
-    this.isUploading = true;
-    const token = localStorage.getItem('token') || '';
-
-    try {
-      const response = await this.uploadService.uploadProfilePicture(file, token).toPromise();
-      this.userData.profilePictureUrl = response.profilePictureUrl;
-      
-      const alert = await this.alertController.create({
-        header: 'Success',
-        message: 'Profile picture updated successfully!',
-        buttons: ['OK']
-      });
-      await alert.present();
-    } catch (error) {
-      console.error('Error uploading profile picture:', error);
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'Failed to upload profile picture. Please try again.',
-        buttons: ['OK']
-      });
-      await alert.present();
-    } finally {
-      this.isUploading = false;
-    }
-  }
-
-  // Modal Controls
-  setOpen(isOpen: boolean) {
-    this.isModalOpen = isOpen;
-  }
-
-  // Logout Modal and Function
-  async presentLogoutModal() {
-    const alert = await this.alertController.create({
-      header: 'Confirmation',
-      message: 'Do you really want to leave?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-        {
-          text: 'Yes, exit',
-          handler: () => {
-            this.logout();
-          },
-        },
-      ],
+  initializeForm() {
+    this.profileForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      currentPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required]],
     });
+  }
 
-    await alert.present();
+  loadUserDetails() {
+    this.authService.checkAuth().subscribe(authResponse => {
+      if (authResponse.isAuthenticated && authResponse.user) {
+        this.userId = authResponse.user.id;
+        this.userData = {
+          name: authResponse.user.name || 'Guest',
+          email: authResponse.user.email || 'No email provided',
+          profilePictureUrl: authResponse.user.profilePictureUrl || ''
+        };
+        this.loadUserComments(this.userId);
+      } else {
+        this.router.navigate(['/login']);
+      }
+    });
+  }
+
+  loadUserComments(userId: string) {
+    this.commentsService.getUserComments(userId).subscribe(comments => {
+      this.userComments = comments;
+    });
+  }
+
+  // Modal Handlers
+  toggleProfileModal(open: boolean) {
+    this.isProfileModalOpen = open;
+    this.cdr.detectChanges(); // Ensure UI updates
+  }
+
+  toggleCommentariesModal(open: boolean) {
+    this.isCommentariesModalOpen = open;
+    this.cdr.detectChanges();
+  }
+
+  toggleScheduleModal(open: boolean) {
+    this.isScheduleModalOpen = open;
+    this.cdr.detectChanges();
+  }
+
+  toggleSettingsModal(open: boolean) {
+    this.isSettingsModalOpen = open;
+    this.cdr.detectChanges();
+  }
+
+  toggleVersionModal(open: boolean) {
+    this.isVersionModalOpen = open;
+    this.cdr.detectChanges();
+  }
+
+  saveProfile() {
+    if (this.profileForm.valid) {
+      const { name, email, currentPassword, newPassword } = this.profileForm.value;
+      this.userService.updateUser(this.userId!, name, email, currentPassword, newPassword).subscribe(
+        () => {
+          this.toggleProfileModal(false);
+          this.loadUserDetails();
+        },
+        (error) => {
+          console.error('Error updating profile', error);
+        }
+      );
+    }
+  }
+
+  presentLogoutModal() {
+    if (confirm('Are you sure you want to log out?')) {
+      this.logout();
+    }
   }
 
   logout() {
-    localStorage.removeItem('token');
-    window.location.href = '/login';
-  }
-
-  // Profile Edit Modal
-  async profileModal() {
-    this.setOpen(true);
-  }
-
-  // Save Profile Changes
-  saveProfile() {
-    if (!this.userData.name || !this.userData.email) {
-      console.error('Name and email are required!');
-      return;
-    }
-
-    if (this.newPassword && !this.currentPassword) {
-      console.error('Please enter your current password to change it.');
-      return;
-    }
-
-    const updateData = {
-      name: this.userData.name,
-      email: this.userData.email,
-      currentPassword: this.currentPassword,
-      newPassword: this.newPassword,
-    };
-
-    this.userService.updateUser(
-      this.userId, 
-      updateData.name, 
-      updateData.email, 
-      updateData.currentPassword, 
-      updateData.newPassword
-    ).subscribe(
-      (response) => {
-        console.log('Profile updated successfully', response);
-        this.setOpen(false);
-        this.loadUserInfo();
+    this.authService.logout().subscribe(
+      () => {
+        localStorage.removeItem('token');
+        this.router.navigate(['/login']);
       },
       (error) => {
-        console.error('Error updating profile:', error);
+        console.error('Logout error:', error);
       }
     );
-  }
-
-  // Other Modals
-  async commentariesModal() {
-    const alert = await this.alertController.create({
-      header: 'Commentaries',
-      message: 'See your commentaries',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-      ],
-    });
-
-    await alert.present();
-  }
-
-  async scheduleModal() {
-    const alert = await this.alertController.create({
-      header: 'Schedule',
-      message: 'Do you really want to leave?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-      ],
-    });
-
-    await alert.present();
-  }
-
-  async settingsModal() {
-    const alert = await this.alertController.create({
-      header: 'Settings',
-      message: 'Do you really want to leave?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-      ],
-    });
-
-    await alert.present();
-  }
-
-  async versionModal() {
-    const alert = await this.alertController.create({
-      header: 'Version',
-      message: '1.0.0',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-      ],
-    });
-
-    await alert.present();
   }
 }

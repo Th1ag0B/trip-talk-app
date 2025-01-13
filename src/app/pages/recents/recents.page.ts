@@ -74,21 +74,13 @@ export class RecentsPage implements OnInit {
 
   async saveEvent(): Promise<void> {
     if (this.eventForm.valid) {
-      const formData = new FormData();
-      Object.entries(this.eventForm.value).forEach(([key, value]) => {
-        if (typeof value === 'string' || value instanceof Blob) {
-          formData.append(key, value); // Add only string or Blob
-        }
-      });
-  
-      if (this.selectedFile) {
-        formData.append('image', this.selectedFile); // Add the file to the form data
-      }
-  
+      const formData = this.eventForm.value;
+
       const loading = await this.loadingCtrl.create({
         message: this.editingEventId ? 'Updating event...' : 'Creating event...',
       });
       await loading.present();
+
       if (this.editingEventId) {
         this.eventService.editEvent(this.editingEventId, formData).subscribe({
           next: async (updatedEvent) => {
@@ -96,20 +88,12 @@ export class RecentsPage implements OnInit {
             if (index !== -1) this.events[index] = updatedEvent;
             this.resetForm();
             loading.dismiss();
-            const toast = await this.toastCtrl.create({
-              message: 'Event updated successfully!',
-              duration: 2000,
-              color: 'success',
-            });
+            const toast = await this.toastCtrl.create({ message: 'Event updated successfully!', duration: 2000, color: 'success' });
             toast.present();
           },
           error: async () => {
             loading.dismiss();
-            const toast = await this.toastCtrl.create({
-              message: 'Error updating event.',
-              duration: 2000,
-              color: 'danger',
-            });
+            const toast = await this.toastCtrl.create({ message: 'Error updating event.', duration: 2000, color: 'danger' });
             toast.present();
           },
         });
@@ -119,20 +103,12 @@ export class RecentsPage implements OnInit {
             this.events.unshift(event);
             this.resetForm();
             loading.dismiss();
-            const toast = await this.toastCtrl.create({
-              message: 'Event created successfully!',
-              duration: 2000,
-              color: 'success',
-            });
+            const toast = await this.toastCtrl.create({ message: 'Event created successfully!', duration: 2000, color: 'success' });
             toast.present();
           },
           error: async () => {
             loading.dismiss();
-            const toast = await this.toastCtrl.create({
-              message: 'Error creating event.',
-              duration: 2000,
-              color: 'danger',
-            });
+            const toast = await this.toastCtrl.create({ message: 'Error creating event.', duration: 2000, color: 'danger' });
             toast.present();
           },
         });
@@ -183,6 +159,7 @@ export class RecentsPage implements OnInit {
   }
 
   startEditing(event: Event): void {
+    console.log('Editing event:', event);
     this.showForm = true;
     this.editingEventId = event.id;
     this.eventForm.patchValue({
@@ -193,7 +170,6 @@ export class RecentsPage implements OnInit {
       endDate: event.endDate,
     });
   }
-
   formatDate(date: Date | string): string {
     const parsedDate = typeof date === 'string' ? new Date(date) : date;
     return parsedDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });

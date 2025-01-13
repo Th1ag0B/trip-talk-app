@@ -1,4 +1,3 @@
-<!-- profile.page.html -->
 <div class="profile-container">
   <div class="profile-header">
     <ion-fab slot="fixed" vertical="top" horizontal="end">
@@ -11,89 +10,93 @@
 
   <div class="initial-page">
     <div class="user-profile">
-      <!-- Hidden file input -->
-      <input
-        #fileInput
-        type="file"
-        accept="image/*"
-        (change)="handleProfilePictureChange($event)"
-        style="display: none"
-      />
-      
-      <!-- Profile picture container -->
       <div class="profile-picture-wrapper">
         <img [src]="userData.profilePictureUrl || '../assets/imagem/Tobipfp.png'" alt="Profile Picture" />
-        <div class="edit-overlay" (click)="triggerFileInput()">
-          <ion-icon name="camera"></ion-icon>
-        </div>
-        <div class="upload-spinner" *ngIf="isUploading">
-          <ion-spinner></ion-spinner>
-        </div>
       </div>
     </div>
-    
-    <p class="user-name">{{ userData.name || 'Tobi' }}</p>
-    <p class="user-email">{{ userData.email || 'tobigmail.com' }}</p>
+
+    <p class="user-name">{{ userData.name || '??' }}</p>
+    <p class="user-email">{{ userData.email || '??' }}</p>
 
     <div class="profile-options">
-      <!-- Your existing buttons... -->
-      <ion-button color="custom" (click)="profileModal()">
+      <ion-button color="custom" (click)="toggleProfileModal(true)">
         <ion-icon name="person-outline"></ion-icon> <span>Profile</span>
         <ion-icon name="chevron-forward-outline"></ion-icon>
       </ion-button>
-      
-      <ion-button color="custom" (click)="commentariesModal()">
+
+      <ion-button color="custom" (click)="toggleCommentariesModal(true)">
         <ion-icon name="chatbubble-ellipses-outline"></ion-icon> <span>Commentaries</span>
         <ion-icon name="chevron-forward-outline"></ion-icon>
       </ion-button>
-      
-      <ion-button color="custom" (click)="scheduleModal()">
+
+      <ion-button color="custom" (click)="toggleScheduleModal(true)">
         <ion-icon name="calendar-outline"></ion-icon><span>Schedule</span>
         <ion-icon name="chevron-forward-outline"></ion-icon>
       </ion-button>
-      
-      <ion-button color="custom" (click)="settingsModal()">
+
+      <ion-button color="custom" (click)="toggleSettingsModal(true)">
         <ion-icon name="settings-outline"></ion-icon> <span>Settings</span>
         <ion-icon name="chevron-forward-outline"></ion-icon>
       </ion-button>
-      
-      <ion-button color="custom" (click)="versionModal()">
+
+      <ion-button color="custom" (click)="toggleVersionModal(true)">
         <ion-icon name="information-circle-outline"></ion-icon> <span>Version</span>
         <ion-icon name="chevron-forward-outline"></ion-icon>
       </ion-button>
     </div>
   </div>
-  <!-- Footer Component -->
-  <app-footer></app-footer>
 
-  <ion-modal [isOpen]="isModalOpen">
+  <!-- Profile Modal -->
+  <ion-modal [isOpen]="isProfileModalOpen">
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-title>Edit Profile</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="setOpen(false)">Close</ion-button>
+            <ion-button (click)="toggleProfileModal(false)">Close</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <ion-item>
-          <ion-label position="floating">Name</ion-label>
-          <ion-input [(ngModel)]="userData.name" placeholder="Enter your name"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Email</ion-label>
-          <ion-input [(ngModel)]="userData.email" placeholder="Enter your email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Current Password</ion-label>
-          <ion-input [(ngModel)]="currentPassword" type="password" placeholder="Enter current password"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">New Password</ion-label>
-          <ion-input [(ngModel)]="newPassword" type="password" placeholder="Enter new password"></ion-input>
-        </ion-item>
-        <ion-button expand="full" (click)="saveProfile()">Save Changes</ion-button>
+        <form [formGroup]="profileForm">
+          <ion-item>
+            <ion-label position="floating">Name</ion-label>
+            <ion-input formControlName="name" placeholder="Enter your name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email" placeholder="Enter your email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Current Password</ion-label>
+            <ion-input formControlName="currentPassword" type="password" placeholder="Enter current password"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">New Password</ion-label>
+            <ion-input formControlName="newPassword" type="password" placeholder="Enter new password"></ion-input>
+          </ion-item>
+          <ion-button expand="full" (click)="saveProfile()" [disabled]="profileForm.invalid">Save Changes</ion-button>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- Version Modal -->
+  <ion-modal [isOpen]="isVersionModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>App Version</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="toggleVersionModal(false)">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="version-info">
+          <h2>Version: 2.3.1</h2>
+          <p>Current version of the app</p>
+        </div>
       </ion-content>
     </ng-template>
   </ion-modal>

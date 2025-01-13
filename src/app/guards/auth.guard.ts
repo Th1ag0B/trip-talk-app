@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { AuthService } from '../services/auth/auth.service'; // Adjust the path as needed
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { AuthService } from '../services/auth/auth.service';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,16 +9,27 @@ import { map } from 'rxjs/operators';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(): Observable<boolean> {
-    return this.authService.checkAuth().pipe(
-      map((authResponse) => {
-        if (authResponse.isAuthenticated) {
-          return true; // Allow navigation
-        } else {
-          this.router.navigate(['/login']); // Redirect to login if not authenticated
-          return false; // Block navigation
-        }
-      })
-    );
+  async canActivate(): Promise<boolean> {
+    try {
+      console.log('AuthGuard: Checking authentication...');
+      const authResponse = await firstValueFrom(this.authService.checkAuth());
+      console.log('AuthGuard: Auth Response:', authResponse);
+
+      // Check if the user is authenticated
+      if (authResponse?.isAuthenticated) {
+        console.log('AuthGuard: User is authenticated.');
+        return true;  // Allow access to the route
+      } else {
+        // Handle case where user is not authenticated
+        console.log('AuthGuard: User is not authenticated. Redirecting to login.');
+        this.router.navigate(['/login']);
+        return false;  // Prevent navigation to the protected route
+      }
+    } catch (error) {
+      console.error('AuthGuard: Error during authentication check:', error);
+      // Redirect to login if there's an error
+      this.router.navigate(['/login']);
+      return false;
+    }
   }
 }

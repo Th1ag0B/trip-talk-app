@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { ModalController } from '@ionic/angular'; 
 import { environment } from '../../../environments/environment';
 import { Observable, of } from 'rxjs'; // Add 'of' import
 import { catchError } from 'rxjs/operators'; // Add catchError import
@@ -12,7 +13,9 @@ interface AuthResponse {
     email: string;
     profilePictureUrl?: string;
   } | null;
+  token?: string; // Add token field
 }
+
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +30,7 @@ export class AuthService {
     return this.http.get<AuthResponse>(`${this.baseUrl}/check`, { withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Auth check error:', error);
+        // Return a default value when an error occurs
         return of({ isAuthenticated: false, user: null });
       })
     );
