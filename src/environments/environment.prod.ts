@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://your-production-api-url.com/api/auth', // change later vercel one
+  apiUrl: 'https://trip-talk-api.vercel.app', 
 }

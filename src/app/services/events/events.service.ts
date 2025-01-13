@@ -57,7 +57,7 @@ export class EventService {
     private authService: AuthService
   ) {}
 
-  // Existing methods remain the same...
+  
   getAllEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(this.apiUrl).pipe(catchError(this.handleError));
   }
@@ -94,7 +94,6 @@ export class EventService {
       .pipe(catchError(this.handleError));
   }
 
-  // Enhanced comment methods
   getComments(eventId: string): Observable<Comment[]> {
     return this.http
       .get<Comment[]>(`${this.apiUrl}/${eventId}/comments`)
@@ -147,7 +146,6 @@ export class EventService {
     );
   }
 
-  // New pitstop methods
   getPitstops(eventId: string): Observable<Pitstop[]> {
     return this.http
       .get<Pitstop[]>(`${this.apiUrl}/${eventId}/pitstops`)
@@ -188,7 +186,6 @@ export class EventService {
     );
   }
 
-  // Existing favorite methods remain the same...
   addFavorite(eventId: string): Observable<Favorite> {
     return this.authService.checkAuth().pipe(
       switchMap((authResponse) => {

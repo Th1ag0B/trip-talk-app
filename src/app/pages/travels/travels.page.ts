@@ -94,17 +94,16 @@ export class TravelsPage implements OnInit, OnDestroy {
   }
   async loadComments(eventId: string) {
     try {
-      // Fetch comments with user info
       const commentsResponse = await this.eventService.getComments(eventId)
         .pipe(takeUntil(this.destroy$))
         .toPromise();
   
-      // If the response is an array, assign it directly to the comments
+
       if (commentsResponse && Array.isArray(commentsResponse)) {
-        // Mapping the response to include user data
+
         this.comments = commentsResponse.map(comment => ({
           ...comment,
-          user: comment.user || { id: '', name: 'Anonymous' }  // Fallback to 'Anonymous' if user is missing
+          user: comment.user || { id: '', name: 'Anonymous' }  
         }));
       } else {
         this.comments = [];
@@ -120,7 +119,7 @@ export class TravelsPage implements OnInit, OnDestroy {
         .pipe(takeUntil(this.destroy$))
         .toPromise();
 
-      // Check if eventDetails is defined and assign it, otherwise set this.event to null
+
       this.event = eventDetails || null;
 
       if (this.event) {
@@ -182,10 +181,9 @@ export class TravelsPage implements OnInit, OnDestroy {
         .pipe(takeUntil(this.destroy$))
         .toPromise();
   
-      this.newCommentContent = ''; // Clear input
+      this.newCommentContent = ''; 
       this.showToast('Comment added successfully', 'success');
     } catch (error) {
-      // Rollback optimistic update in case of error
       this.comments.pop();
       this.showToast('Error adding comment', 'danger');
     } finally {

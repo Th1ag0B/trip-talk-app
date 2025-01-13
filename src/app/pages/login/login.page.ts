@@ -10,11 +10,11 @@ import { AuthService } from '../../services/auth/auth.service';
 export class LoginPage {
   email: string = '';
   password: string = '';
-  confirmPassword: string = ''; // For signup
-  name: string = '';  // For signup
+  confirmPassword: string = ''; 
+  name: string = '';  
   errorMessage: string = '';
-  authMode: 'login' | 'signup' = 'login'; // Default is login
-  passwordVisible: boolean = false; // For password visibility toggle
+  authMode: 'login' | 'signup' = 'login'; 
+  passwordVisible: boolean = false; 
 
   constructor(private router: Router, private authService: AuthService) {}
 

@@ -96,7 +96,7 @@ export class FavoritesPage implements OnInit {
     await toast.present();
   }
  
-// Modify goToEventDetails method in FavoritesPage
+
 async goToEventDetails(eventId: string) {
   const loading = await this.loadingController.create({
     message: 'Loading event details...',
@@ -106,7 +106,6 @@ async goToEventDetails(eventId: string) {
   try {
     const eventDetails = await firstValueFrom(this.eventService.getEventDetails(eventId));
     console.log('Event Details:', eventDetails);
-    // Updated the route path to match '/event-details/:id'
     this.router.navigate(['/event-details', eventId]);
   } catch (error) {
     console.error('Error fetching event details:', error);
